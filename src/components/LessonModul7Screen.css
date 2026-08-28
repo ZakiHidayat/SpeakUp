@@ -1449,12 +1449,18 @@
   justify-content: center;
   overflow: hidden;
   position: relative;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
 }
 
 .modul7-page17-video {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  border-radius: 0;
 }
 
 .modul7-page17-text-wrapper {

@@ -1476,7 +1476,6 @@ function LessonPage17({ onNext, onBack }) {
           <video
             src={videoHappySpeaker}
             autoPlay
-            loop
             muted
             playsInline
             className="modul7-page17-video"
