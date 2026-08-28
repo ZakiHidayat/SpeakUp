@@ -251,24 +251,26 @@
 }
 
 .btn-spontan-finish-speaking {
-  width: 100%;
-  max-width: 358px;
-  height: 48px;
-  background-color: #B84747;
-  border: 1px solid #752525;
+  width: auto;
+  min-width: 156px;
+  height: 46px;
+  background-color: #B54747;
+  border: 1px solid rgba(205, 121, 121, 0.65);
   border-radius: 34px;
-  box-shadow: 0px 4px 0px 0px #752525;
-  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
-  font-size: 14px;
-  font-weight: 700;
-  color: #FFFFFF;
+  box-shadow: 0px 4px 0px 0px #9B3E3E;
+  padding: 0 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFFFFF;
   outline: none;
   -webkit-tap-highlight-color: transparent;
   transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.15s ease;
+  box-sizing: border-box;
 }
 
 .btn-spontan-finish-speaking:hover {
@@ -277,7 +279,7 @@
 
 .btn-spontan-finish-speaking:active {
   transform: translateY(2px);
-  box-shadow: 0px 2px 0px 0px #752525;
+  box-shadow: 0px 2px 0px 0px #9B3E3E;
 }
 
 /* ── Exit Modal ───────────────────────────────────────────────────────────── */
