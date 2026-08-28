@@ -7,7 +7,7 @@ import imgPanik from "../assets/pages_assets/lessons/lesson-6-modul7/Image-Panik
 import imgGakKompeten from "../assets/pages_assets/lessons/lesson-6-modul7/Image-GakKompeten-Page1.png";
 import imgBrain from "../assets/pages_assets/lessons/lesson-6-modul7/Image-Brain.png";
 import imgMascottQuotes from "../assets/pages_assets/lessons/lesson-6-modul7/Image-Mascott-Quotes.png";
-import imgHeroModul7 from "../assets/pages_assets/modul_details/modul_7/Image_Hero_Modul7.png";
+import imgMascottSenyum from "../assets/pages_assets/lessons/lesson-6-modul7/Image-Mascott-SenyumJahat.png";
 import videoGainXP from "../assets/pages_assets/gain_xp/Video-Gain-XP.webm";
 
 // ─── Back Arrow Icon ─────────────────────────────────────────────────────────
@@ -894,7 +894,7 @@ function LessonPage11({ onNext, onBack }) {
         {/* Stage Hero Image */}
         <div className="modul7-page11-hero-wrapper" data-node-id="339:2429">
           <img
-            src={imgHeroModul7}
+            src={imgMascottSenyum}
             alt="Argumenmu sudah siap"
             className="modul7-page11-hero-img"
           />
