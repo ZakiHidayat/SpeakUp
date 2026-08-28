@@ -88,16 +88,8 @@ function SpontanThemePage({ topic, onStart, onBack, onTopBarBack }) {
         </p>
       </div>
 
-      {/* Dual Bottom Buttons */}
+      {/* Single Bottom CTA Button */}
       <div className="simulasi-spontan-cta-wrapper">
-        <button
-          type="button"
-          className="btn-spontan-round-back"
-          onClick={onBack}
-          aria-label="Kembali ke halaman simulasi"
-        >
-          <IconArrowLeft color="#FFFFFF" />
-        </button>
         <button
           type="button"
           className="btn-spontan-start"

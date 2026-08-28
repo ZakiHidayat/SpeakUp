@@ -112,7 +112,7 @@
   margin: 0;
 }
 
-/* ── Step 1: Bottom CTA Dual Buttons ──────────────────────────────────────── */
+/* ── Step 1: Bottom CTA Button ─────────────────────────────────────────────── */
 .simulasi-spontan-cta-wrapper {
   position: absolute;
   bottom: 0;
@@ -120,35 +120,15 @@
   right: 0;
   padding: 0 16px 40px 16px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 12px;
   box-sizing: border-box;
   z-index: 10;
 }
 
-.btn-spontan-round-back {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background-color: #31424A;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  flex-shrink: 0;
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-  transition: transform 0.12s ease, background-color 0.12s ease;
-}
-
-.btn-spontan-round-back:active {
-  transform: scale(0.92);
-  background-color: #27373E;
-}
-
 .btn-spontan-start {
-  flex: 1;
+  width: 100%;
+  max-width: 358px;
   height: 48px;
   background-color: var(--color-secondary, #E8753D);
   border: 1px solid var(--color-secondary-dark, #8B4827);
