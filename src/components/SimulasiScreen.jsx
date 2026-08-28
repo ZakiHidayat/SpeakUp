@@ -24,7 +24,7 @@ export default function SimulasiScreen({
     {
       id: "spontan",
       title: "Spontan",
-      description: "1 tema acak. Latih bicaramu secara langsung tanpa persiapan sama sekali.",
+      description: "1 topik acak. Latih bicaramu secara langsung tanpa persiapan sama sekali.",
       image: imgSpontan,
       nodeId: "350:3623",
     },

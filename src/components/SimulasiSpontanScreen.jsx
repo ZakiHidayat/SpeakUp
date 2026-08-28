@@ -42,8 +42,8 @@ function ExitSimulasiModal({ isOpen, onClose, onConfirm }) {
   );
 }
 
-// ─── Step 1: Theme Generated Page ───────────────────────────────────────────
-function SpontanThemePage({ theme, onStart, onBack, onTopBarBack }) {
+// ─── Step 1: Topic Generated Page ───────────────────────────────────────────
+function SpontanThemePage({ topic, onStart, onBack, onTopBarBack }) {
   const [countdown, setCountdown] = useState(30);
 
   useEffect(() => {
@@ -75,10 +75,10 @@ function SpontanThemePage({ theme, onStart, onBack, onTopBarBack }) {
       <div className="simulasi-spontan-content">
         <div className="simulasi-spontan-theme-wrapper">
           <p className="simulasi-spontan-theme-subtitle">
-            Tema nya adalah
+            Topik nya adalah
           </p>
           <h2 className="simulasi-spontan-theme-title">
-            “{theme}”
+            “{topic}”
           </h2>
         </div>
 
@@ -111,7 +111,7 @@ function SpontanThemePage({ theme, onStart, onBack, onTopBarBack }) {
 }
 
 // ─── Step 2: Speaking Screen (3 Minutes / 180s) ──────────────────────────────
-function SpontanSpeakingPage({ onFinish, onTopBarBack }) {
+function SpontanSpeakingPage({ topic, onFinish, onTopBarBack }) {
   const [secondsLeft, setSecondsLeft] = useState(180); // 3:00
   const [audioLevels, setAudioLevels] = useState([39, 15, 26, 26, 39]);
 
@@ -244,9 +244,15 @@ function SpontanSpeakingPage({ onFinish, onTopBarBack }) {
 
       {/* Main Speaking Body */}
       <div className="simulasi-speaking-content">
-        <h2 className="simulasi-speaking-prompt">
-          Sampaikan pendapatmu
-        </h2>
+        {/* Topic Header above the timer circle */}
+        <div className="simulasi-speaking-topic-wrapper">
+          <p className="simulasi-speaking-topic-subtitle">
+            Topik nya adalah
+          </p>
+          <h2 className="simulasi-speaking-topic-title">
+            “{topic}”
+          </h2>
+        </div>
 
         {/* Big Circular 3:00 Timer */}
         <div className="simulasi-speaking-circle">
@@ -287,7 +293,7 @@ export default function SimulasiSpontanScreen({ onBack, onFinish }) {
   const [step, setStep] = useState("theme");
   const [showExitModal, setShowExitModal] = useState(false);
 
-  const themeText = "Apakah belajar sambil mendengarkan musik membuatmu lebih fokus?";
+  const topicText = "Apakah belajar sambil mendengarkan musik membuatmu lebih fokus?";
 
   const handleTopBarBack = () => {
     setShowExitModal(true);
@@ -314,7 +320,7 @@ export default function SimulasiSpontanScreen({ onBack, onFinish }) {
     <div className="simulasi-spontan-screen">
       {step === "theme" && (
         <SpontanThemePage
-          theme={themeText}
+          topic={topicText}
           onStart={handleStartSpeaking}
           onBack={onBack}
           onTopBarBack={handleTopBarBack}
@@ -323,6 +329,7 @@ export default function SimulasiSpontanScreen({ onBack, onFinish }) {
 
       {step === "speaking" && (
         <SpontanSpeakingPage
+          topic={topicText}
           onFinish={handleFinishSpeaking}
           onTopBarBack={handleTopBarBack}
         />

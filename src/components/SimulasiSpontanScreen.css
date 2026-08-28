@@ -187,16 +187,37 @@
   padding: 0 20px 110px 20px;
   box-sizing: border-box;
   text-align: center;
-  gap: 32px;
+  gap: 28px;
 }
 
-.simulasi-speaking-prompt {
+.simulasi-speaking-topic-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  max-width: 320px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.simulasi-speaking-topic-subtitle {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 13px;
+  font-weight: 500;
+  color: #889398;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.simulasi-speaking-topic-title {
   font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
   font-size: 18px;
   font-weight: 700;
   color: #FFFFFF;
-  letter-spacing: -0.52px;
+  letter-spacing: -0.5px;
+  line-height: 1.35;
   margin: 0;
+  text-align: center;
 }
 
 .simulasi-speaking-circle {
