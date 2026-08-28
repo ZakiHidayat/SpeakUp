@@ -13,16 +13,20 @@
   box-sizing: border-box;
 }
 
-/* ── Top Bar ─────────────────────────────────────────────────────────────── */
+/* ── Top Bar (Matching HomeScreen TopBar) ─────────────────────────────────── */
 .simulasi-topbar {
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 20;
+  z-index: 30;
   background-color: var(--color-bg-app, #FAF8F3);
-  padding: 24px 20px 16px 20px;
+  padding: 48px 20px 16px 20px;
   box-sizing: border-box;
+  height: 100px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
   width: 100%;
 }
 
@@ -41,16 +45,18 @@
   color: var(--color-text-primary, #243238);
   letter-spacing: -0.6141px;
   margin: 0;
-  line-height: 1.2;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .simulasi-streak-badge {
   background-color: rgba(255, 157, 0, 0.19);
   border-radius: 34px;
-  padding: 4px 10px;
+  padding: 4px 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .simulasi-streak-text {
@@ -59,7 +65,7 @@
   font-weight: 700;
   color: #955C00;
   letter-spacing: -0.4437px;
-  line-height: 1;
+  white-space: nowrap;
 }
 
 /* ── Content Section ─────────────────────────────────────────────────────── */
