@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import AIAnalysis from "./AIAnalysis";
 import CompletedLesson from "./CompletedLesson";
+import imgMascottSedih from "../assets/pages_assets/lessons/lesson-6-modul7/Image-Mascott-Sedih.png";
 import "./SimulasiSpontanScreen.css";
 
 // ─── Back Arrow Icon ─────────────────────────────────────────────────────────
@@ -43,7 +44,7 @@ function ExitSimulasiModal({ isOpen, onClose, onConfirm }) {
 }
 
 // ─── Step 1: Topic Generated Page ───────────────────────────────────────────
-function SpontanThemePage({ topic, onStart, onBack, onTopBarBack }) {
+function SpontanThemePage({ topic, onStart, onTopBarBack }) {
   const [countdown, setCountdown] = useState(30);
 
   useEffect(() => {
@@ -106,14 +107,19 @@ function SpontanThemePage({ topic, onStart, onBack, onTopBarBack }) {
 function SpontanSpeakingPage({ topic, onFinish, onTopBarBack }) {
   const [secondsLeft, setSecondsLeft] = useState(180); // 3:00
   const [audioLevels, setAudioLevels] = useState([39, 15, 26, 26, 39]);
+  const [showNoVoice, setShowNoVoice] = useState(false);
+  const [audioKey, setAudioKey] = useState(0);
 
   const audioContextRef = useRef(null);
   const analyserRef = useRef(null);
   const streamRef = useRef(null);
   const animationFrameRef = useRef(null);
+  const hasSpokenRef = useRef(false);
+  const speechCountRef = useRef(0);
 
   // Timer countdown
   useEffect(() => {
+    if (showNoVoice) return;
     if (secondsLeft <= 0) {
       handleFinishSpeaking();
       return;
@@ -122,10 +128,11 @@ function SpontanSpeakingPage({ topic, onFinish, onTopBarBack }) {
       setSecondsLeft((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
     return () => clearInterval(timer);
-  }, [secondsLeft]);
+  }, [secondsLeft, showNoVoice]);
 
   // Real Microphone Stream & Wave Analyzer
   useEffect(() => {
+    if (showNoVoice) return;
     let isMounted = true;
 
     async function initAudio() {
@@ -160,6 +167,14 @@ function SpontanSpeakingPage({ topic, onFinish, onTopBarBack }) {
           const b3 = dataArray[6] || 0;
           const b4 = dataArray[9] || 0;
           const b5 = dataArray[12] || 0;
+
+          const avgVol = (b1 + b2 + b3 + b4 + b5) / 5;
+          if (avgVol > 20) {
+            speechCountRef.current = (speechCountRef.current || 0) + 1;
+            if (speechCountRef.current >= 4) {
+              hasSpokenRef.current = true;
+            }
+          }
 
           setAudioLevels([
             Math.max(12, Math.min(52, Math.round((b1 / 255) * 52))),
@@ -201,9 +216,9 @@ function SpontanSpeakingPage({ topic, onFinish, onTopBarBack }) {
         audioContextRef.current.close().catch(() => {});
       }
     };
-  }, []);
+  }, [showNoVoice, audioKey]);
 
-  const handleFinishSpeaking = () => {
+  const cleanAudio = () => {
     if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     if (streamRef.current) {
       streamRef.current.getTracks().forEach((t) => t.stop());
@@ -211,7 +226,23 @@ function SpontanSpeakingPage({ topic, onFinish, onTopBarBack }) {
     if (audioContextRef.current && audioContextRef.current.state !== "closed") {
       audioContextRef.current.close().catch(() => {});
     }
+  };
+
+  const handleFinishSpeaking = () => {
+    cleanAudio();
+    if (!hasSpokenRef.current) {
+      setShowNoVoice(true);
+      return;
+    }
     onFinish();
+  };
+
+  const handleRetry = () => {
+    setShowNoVoice(false);
+    setSecondsLeft(180);
+    hasSpokenRef.current = false;
+    speechCountRef.current = 0;
+    setAudioKey((k) => k + 1);
   };
 
   const formatTime = (sec) => {
@@ -219,6 +250,56 @@ function SpontanSpeakingPage({ topic, onFinish, onTopBarBack }) {
     const s = sec % 60;
     return `${m}:${s < 10 ? "0" : ""}${s}`;
   };
+
+  // ── No Voice Detected State ──
+  if (showNoVoice) {
+    return (
+      <div className="simulasi-spontan-page" data-name="Spontan-NoVoice">
+        {/* TopBar with only back button (no progress bar) */}
+        <div className="simulasi-spontan-topbar">
+          <button
+            type="button"
+            className="simulasi-spontan-back-btn"
+            onClick={onTopBarBack}
+            aria-label="Kembali"
+          >
+            <IconArrowLeft color="#FFFFFF" />
+          </button>
+        </div>
+
+        {/* Mascot Sedih Stage Illustration + Text */}
+        <div className="simulasi-spontan-novoice-content">
+          <div className="simulasi-spontan-novoice-hero-wrapper">
+            <img
+              src={imgMascottSedih}
+              alt="Suaramu tidak terdengar"
+              className="simulasi-spontan-novoice-hero-img"
+            />
+          </div>
+
+          <div className="simulasi-spontan-novoice-text-wrapper">
+            <h2 className="simulasi-spontan-novoice-title">
+              Suaramu tidak terdengar...
+            </h2>
+            <p className="simulasi-spontan-novoice-subtitle">
+              Pastikan mikrofonmu aktif dan tidak tertutup. Kalau semuanya sudah siap, kita bisa mulai lagi.
+            </p>
+          </div>
+        </div>
+
+        {/* Single Action Button Footer */}
+        <div className="simulasi-spontan-novoice-footer">
+          <button
+            type="button"
+            className="btn-spontan-start"
+            onClick={handleRetry}
+          >
+            Ulangi lagi
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="simulasi-spontan-page" data-name="Spontan-Speaking">
@@ -314,7 +395,6 @@ export default function SimulasiSpontanScreen({ onBack, onFinish }) {
         <SpontanThemePage
           topic={topicText}
           onStart={handleStartSpeaking}
-          onBack={onBack}
           onTopBarBack={handleTopBarBack}
         />
       )}

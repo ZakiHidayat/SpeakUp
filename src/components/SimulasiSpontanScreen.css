@@ -282,6 +282,84 @@
   box-shadow: 0px 2px 0px 0px #9B3E3E;
 }
 
+/* ── Step 2 (Error): No Voice Detected Screen ─────────────────────────────── */
+.simulasi-spontan-novoice-content {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 0 20px 0;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.simulasi-spontan-novoice-hero-wrapper {
+  width: 100%;
+  height: 340px;
+  max-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.simulasi-spontan-novoice-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.simulasi-spontan-novoice-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 0 24px;
+  box-sizing: border-box;
+  text-align: center;
+  max-width: 340px;
+}
+
+.simulasi-spontan-novoice-title {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.6141px;
+  margin: 0;
+  text-align: center;
+}
+
+.simulasi-spontan-novoice-subtitle {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-text-caption, #8199A3);
+  letter-spacing: -0.4437px;
+  line-height: 1.45;
+  margin: 0;
+  text-align: center;
+}
+
+.simulasi-spontan-novoice-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0 16px 40px 16px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
 /* ── Exit Modal ───────────────────────────────────────────────────────────── */
 .simulasi-exit-modal-overlay {
   position: absolute;
