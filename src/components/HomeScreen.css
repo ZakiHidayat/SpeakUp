@@ -474,11 +474,14 @@
   font-weight: 700;
   color: #243238;
   letter-spacing: -0.522px;
-  line-height: normal;
-  white-space: nowrap;
+  line-height: 1.25;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   max-width: 220px;
+  word-break: break-word;
 }
 
 .home-module-tag-wrapper {
