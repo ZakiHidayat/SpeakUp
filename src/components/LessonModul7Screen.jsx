@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ExitLessonModal } from "./LessonScreen";
+import AIAnalysis from "./AIAnalysis";
+import CompletedLesson from "./CompletedLesson";
 import "./LessonModul7Screen.css";
 
 // ─── Assets for Modul 7 Lesson 6 ─────────────────────────────────────────────
@@ -1758,85 +1760,6 @@ function LessonPage17({ onNext, onBack, onTopBarBack }) {
   );
 }
 
-// ─── Completed Lesson Gain XP Screen ─────────────────────────────────────────
-function CompletedLesson({ onFinish }) {
-  const [displayedXP, setDisplayedXP] = useState(0);
-  const [isCounting, setIsCounting] = useState(false);
-  const [showButton, setShowButton] = useState(false);
-  const videoRef = useRef(null);
-
-  const handleVideoEnded = () => {
-    setIsCounting(true);
-    let current = 0;
-    const target = 100;
-    const duration = 2000;
-    const stepTime = 20;
-    const increment = target / (duration / stepTime);
-
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        setDisplayedXP(target);
-        clearInterval(timer);
-        setIsCounting(false);
-        setTimeout(() => {
-          setShowButton(true);
-        }, 1000);
-      } else {
-        setDisplayedXP(Math.floor(current));
-      }
-    }, stepTime);
-  };
-
-  return (
-    <div className="lesson-completed-screen" data-node-id="gain-xp">
-      <div className="lesson-completed-content">
-        <div className="lesson-gain-xp-video-wrapper">
-          <video
-            ref={videoRef}
-            src={videoGainXP}
-            autoPlay
-            muted
-            playsInline
-            onEnded={handleVideoEnded}
-            className="lesson-gain-xp-video"
-          />
-        </div>
-
-        {displayedXP > 0 && (
-          <div className="lesson-completed-xp-badge-wrapper lesson-badge-appear">
-            <div className="lesson-completed-xp-badge">
-              <div className={`lesson-sparkle-stars ${isCounting ? "active-sparkle" : "sparkle-stopped"}`}>
-                <span className="sparkle-star star-1">✦</span>
-                <span className="sparkle-star star-2">✨</span>
-                <span className="sparkle-star star-3">✧</span>
-                <span className="sparkle-star star-4">✦</span>
-                <span className="sparkle-star star-5">✨</span>
-                <span className="sparkle-star star-6">✧</span>
-              </div>
-              <p className="lesson-completed-xp-amount">
-                +{displayedXP} XP
-              </p>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {showButton && (
-        <div className="lesson-cta-wrapper lesson-cta-appear">
-          <button
-            type="button"
-            className="btn-lesson-finish"
-            onClick={onFinish}
-          >
-            Tutup
-          </button>
-        </div>
-      )}
-    </div>
-  );
-}
-
 // ─── Main Lesson 6 Modul 7 Screen ────────────────────────────────────────────
 export default function LessonModul7Screen({ onBack, onFinish }) {
   const [step, setStep] = useState(1);
@@ -1869,7 +1792,8 @@ export default function LessonModul7Screen({ onBack, onFinish }) {
       if (prev === 14) return 15;
       if (prev === 15) return 16;
       if (prev === 16) return 17;
-      if (prev === 17) return "completed";
+      if (prev === 17) return "analysis";
+      if (prev === "analysis") return "completed";
       return "completed";
     });
   };
@@ -1896,7 +1820,8 @@ export default function LessonModul7Screen({ onBack, onFinish }) {
       if (prev === 15) return 14;
       if (prev === 16) return 15;
       if (prev === 17) return 16;
-      if (prev === "completed") return 17;
+      if (prev === "analysis") return 17;
+      if (prev === "completed") return "analysis";
       return prev - 1;
     });
   };
@@ -1920,7 +1845,8 @@ export default function LessonModul7Screen({ onBack, onFinish }) {
       {step === 15 && <LessonPage15 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
       {step === 16 && <LessonPage16 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
       {step === 17 && <LessonPage17 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
-      {step === "completed" && <CompletedLesson onFinish={onFinish} />}
+      {step === "analysis" && <AIAnalysis onContinue={goNext} />}
+      {step === "completed" && <CompletedLesson onFinish={onFinish} xpEarned={50} />}
 
       {/* Exit Confirmation Modal */}
       <ExitLessonModal
