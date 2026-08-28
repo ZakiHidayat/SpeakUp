@@ -101,7 +101,15 @@ const DEFAULT_ANALYSIS = {
     "Kamu sudah menjawab pertanyaan dengan relevan dan menyampaikan argumen yang cukup kuat. Fokus berikutnya: Kurangi kata pengisi saat berpindah dari satu alasan ke alasan berikutnya.",
 };
 
-export default function AIAnalysis({ analysis = DEFAULT_ANALYSIS, onContinue }) {
+export default function AIAnalysis({
+  analysis = DEFAULT_ANALYSIS,
+  onContinue,
+  hideArgument = false,
+}) {
+  const detailedMetrics = hideArgument
+    ? (analysis.detailedMetrics || []).filter((item) => item.id !== "argument")
+    : analysis.detailedMetrics || [];
+
   return (
     <div className="analysis-screen" data-node-id="211:4914" data-name="Analysis">
       {/* ── Scrollable Body ──────────────────────────────────── */}
@@ -137,7 +145,7 @@ export default function AIAnalysis({ analysis = DEFAULT_ANALYSIS, onContinue }) 
 
           {/* Argumen & Relevansi Cards (Full Width) */}
           <div className="analysis-detailed-wrapper" data-node-id="390:3914" data-name="ArgumenRelevansi-Wrapper">
-            {analysis.detailedMetrics.map((item) => (
+            {detailedMetrics.map((item) => (
               <div
                 key={item.id}
                 className="analysis-detailed-card"

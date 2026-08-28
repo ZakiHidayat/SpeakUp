@@ -1,0 +1,369 @@
+/* ==========================================================================
+   Simulasi Spontan Screen (4 Steps Flow)
+   ========================================================================== */
+
+.simulasi-spontan-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: #243238;
+}
+
+.simulasi-spontan-page {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #243238;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ── TopBar ───────────────────────────────────────────────────────────────── */
+.simulasi-spontan-topbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 48px 16px 12px 16px;
+  background-color: #243238;
+  box-sizing: border-box;
+}
+
+.simulasi-spontan-back-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  color: #FFFFFF;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.12s ease, opacity 0.12s ease;
+}
+
+.simulasi-spontan-back-btn:active {
+  transform: scale(0.92);
+  opacity: 0.7;
+}
+
+/* ── Step 1: Spontan Theme Content ────────────────────────────────────────── */
+.simulasi-spontan-content {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px 100px 24px;
+  box-sizing: border-box;
+  text-align: center;
+  gap: 28px;
+}
+
+.simulasi-spontan-theme-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 320px;
+}
+
+.simulasi-spontan-theme-subtitle {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 500;
+  color: #889398;
+  margin: 0;
+}
+
+.simulasi-spontan-theme-title {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.52px;
+  line-height: 1.4;
+  margin: 0;
+  text-align: center;
+}
+
+.simulasi-spontan-countdown-text {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 12px;
+  font-weight: 400;
+  color: #889398;
+  margin: 0;
+}
+
+/* ── Step 1: Bottom CTA Dual Buttons ──────────────────────────────────────── */
+.simulasi-spontan-cta-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 16px 40px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+.btn-spontan-round-back {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #31424A;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.12s ease, background-color 0.12s ease;
+}
+
+.btn-spontan-round-back:active {
+  transform: scale(0.92);
+  background-color: #27373E;
+}
+
+.btn-spontan-start {
+  flex: 1;
+  height: 48px;
+  background-color: var(--color-secondary, #E8753D);
+  border: 1px solid var(--color-secondary-dark, #8B4827);
+  border-radius: 34px;
+  box-shadow: 0px 4px 0px 0px var(--color-secondary-dark, #8B4827);
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.15s ease;
+}
+
+.btn-spontan-start:hover {
+  filter: brightness(1.05);
+}
+
+.btn-spontan-start:active {
+  transform: translateY(2px);
+  box-shadow: 0px 2px 0px 0px var(--color-secondary-dark, #8B4827);
+}
+
+/* ── Step 2: Speaking Screen Content ──────────────────────────────────────── */
+.simulasi-speaking-content {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px 110px 20px;
+  box-sizing: border-box;
+  text-align: center;
+  gap: 32px;
+}
+
+.simulasi-speaking-prompt {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.52px;
+  margin: 0;
+}
+
+.simulasi-speaking-circle {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background-color: #24A981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 8px 24px rgba(36, 169, 129, 0.35);
+  flex-shrink: 0;
+}
+
+.simulasi-speaking-timer {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 38px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.simulasi-speaking-wave-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 60px;
+}
+
+.simulasi-speaking-wave-bar {
+  width: 5px;
+  min-height: 12px;
+  background-color: #24A981;
+  border-radius: 99px;
+  transition: height 0.08s ease-out;
+}
+
+/* ── Step 2: Selesai Bicara Button ────────────────────────────────────────── */
+.simulasi-speaking-cta-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 16px 40px 16px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+.btn-spontan-finish-speaking {
+  width: 100%;
+  max-width: 358px;
+  height: 48px;
+  background-color: #B84747;
+  border: 1px solid #752525;
+  border-radius: 34px;
+  box-shadow: 0px 4px 0px 0px #752525;
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.15s ease;
+}
+
+.btn-spontan-finish-speaking:hover {
+  filter: brightness(1.06);
+}
+
+.btn-spontan-finish-speaking:active {
+  transform: translateY(2px);
+  box-shadow: 0px 2px 0px 0px #752525;
+}
+
+/* ── Exit Modal ───────────────────────────────────────────────────────────── */
+.simulasi-exit-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 24px;
+  box-sizing: border-box;
+  animation: fadeInModal 0.2s ease-out forwards;
+}
+
+.simulasi-exit-modal-card {
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  padding: 24px;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  animation: scaleInModal 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleInModal {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.simulasi-exit-modal-title {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: #243238;
+  margin: 0 0 8px 0;
+}
+
+.simulasi-exit-modal-desc {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 13px;
+  font-weight: 400;
+  color: #889398;
+  line-height: 1.45;
+  margin: 0 0 20px 0;
+}
+
+.simulasi-exit-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.simulasi-exit-btn-cancel {
+  width: 100%;
+  height: 44px;
+  background-color: var(--color-primary, #24A981);
+  border: 1px solid var(--color-primary-dark, #17674F);
+  border-radius: 24px;
+  box-shadow: 0px 3px 0px 0px var(--color-primary-dark, #17674F);
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFFFFF;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.simulasi-exit-btn-confirm {
+  width: 100%;
+  height: 40px;
+  background: none;
+  border: none;
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 13px;
+  font-weight: 600;
+  color: #889398;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}

@@ -12,6 +12,7 @@ import PracticeZone from "./components/PracticeZone";
 import LiveRoomScreen from "./components/LiveRoomScreen";
 import ModuleDetailScreen from "./components/ModuleDetailScreen";
 import LessonScreen from "./components/LessonScreen";
+import SimulasiSpontanScreen from "./components/SimulasiSpontanScreen";
 import "./App.css";
 
 function App() {
@@ -149,6 +150,20 @@ function App() {
           onNavigateHome={() => setCurrentScreen("home")}
           onNavigateGroup={handleNavigateGroup}
           onNavigateProfile={() => alert("Halaman Profil Segera Hadir!")}
+          onSelectScenario={(scenario) => {
+            if (scenario.id === "spontan") {
+              setCurrentScreen("simulasi-spontan");
+            } else {
+              alert(`Memulai Simulasi: ${scenario.title}`);
+            }
+          }}
+        />
+      )}
+
+      {currentScreen === "simulasi-spontan" && (
+        <SimulasiSpontanScreen
+          onBack={() => setCurrentScreen("simulasi")}
+          onFinish={() => setCurrentScreen("simulasi")}
         />
       )}
 
