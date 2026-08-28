@@ -1,0 +1,628 @@
+/* ==========================================================================
+   Lesson 6 Modul 7 - Hadapi Pertanyaan Menantang (Figma Node 329:1659)
+   ========================================================================== */
+
+.modul7-lesson-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-bg-app, #FAF8F3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.modul7-lesson-page {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+}
+.modul7-lesson-page::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Top Bar & Progress Bar ────────────────────────────────────────────────── */
+.modul7-lesson-topbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: var(--color-bg-app, #FAF8F3);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 20px 16px 20px;
+  box-sizing: border-box;
+}
+
+.modul7-lesson-back-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  align-self: flex-start;
+  transition: transform 0.12s ease, opacity 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.modul7-lesson-back-btn:hover {
+  transform: translateX(-2px);
+  opacity: 0.85;
+}
+.modul7-lesson-back-btn:active {
+  transform: translateX(-4px) scale(0.95);
+}
+
+.modul7-lesson-progress-bar {
+  width: 100%;
+  height: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.modul7-lesson-progress-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.1);
+  border: 0.3px solid rgba(0, 0, 0, 0.04);
+  border-radius: 29px;
+  overflow: hidden;
+  position: relative;
+}
+
+.modul7-lesson-progress-fill {
+  height: 100%;
+  background-color: var(--color-primary, #24A981);
+  border-radius: 29px;
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Content Area ─────────────────────────────────────────────────────────── */
+.modul7-lesson-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px 100px 16px;
+  box-sizing: border-box;
+  width: 100%;
+  margin: auto 0;
+}
+
+.modul7-lesson-heading {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text-primary, #243238);
+  letter-spacing: -0.6141px;
+  text-align: center;
+  margin: 0 0 24px 0;
+  line-height: 1.25;
+  width: 100%;
+  max-width: 300px;
+}
+
+.modul7-cards-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ── Feeling Cards ────────────────────────────────────────────────────────── */
+.modul7-feeling-card {
+  width: 100%;
+  min-height: 122px;
+  background: #FFFFFF;
+  border: 1px solid var(--color-border, rgba(20, 60, 63, 0.12));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px 0 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0px 2px 6px rgba(20, 60, 63, 0.04);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.modul7-feeling-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0px 4px 10px rgba(20, 60, 63, 0.08);
+}
+
+.modul7-card-img-container {
+  width: 113px;
+  height: 120px;
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+}
+
+.modul7-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom left;
+  display: block;
+}
+
+.modul7-card-text {
+  flex: 1;
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-primary, #243238);
+  letter-spacing: -0.4437px;
+  text-align: center;
+  line-height: 1.35;
+  margin: 0;
+  word-break: break-word;
+}
+
+/* ── Fixed Bottom CTA ─────────────────────────────────────────────────────── */
+.modul7-lesson-cta-wrapper {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 16px 40px 16px;
+  background: linear-gradient(180deg, rgba(250, 248, 243, 0) 0%, rgba(250, 248, 243, 0.95) 25%, #FAF8F3 100%);
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+.btn-modul7-next {
+  width: 100%;
+  max-width: 366px;
+  height: 46px;
+  background-color: var(--color-secondary, #E8753D);
+  border: 1px solid #8B4827;
+  border-radius: 34px;
+  box-shadow: 0px 4px 0px 0px #8B4827;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFFFFF;
+  white-space: nowrap;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-modul7-next:hover {
+  filter: brightness(1.05);
+}
+
+.btn-modul7-next:active {
+  transform: translateY(2px);
+  box-shadow: 0px 2px 0px 0px #8B4827;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PAGE 2: QUOTES & MINDSET (Figma Node 329:1710)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.modul7-lesson-page-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.modul7-page2-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 24px 100px 24px;
+  position: relative;
+  z-index: 5;
+  box-sizing: border-box;
+}
+
+.modul7-page2-quote {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-primary, #243238);
+  letter-spacing: -0.522px;
+  line-height: 1.6;
+  text-align: center;
+  max-width: 310px;
+  margin: 0 auto;
+}
+
+/* Mascot Illustration at bottom */
+.modul7-page2-mascot-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 390px;
+  height: 320px;
+  pointer-events: none;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modul7-page2-mascot-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  display: block;
+}
+
+/* Dual Button Footer */
+.modul7-page2-cta-wrapper {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 16px 40px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  z-index: 10;
+  width: 100%;
+}
+
+.btn-modul7-round-back {
+  width: 65px;
+  height: 46px;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(36, 50, 56, 0.18);
+  border-radius: 34px;
+  box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-modul7-round-back:hover {
+  filter: brightness(0.98);
+}
+.btn-modul7-round-back:active {
+  transform: translateY(2px);
+  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.18);
+}
+
+.btn-modul7-next--flex {
+  flex: 1;
+  max-width: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PAGE 3: COGNITIVE RESTRUCTURING (Figma Node 329:1733)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.modul7-page3-content {
+  padding: 16px 16px 100px 16px;
+  gap: 28px;
+}
+
+.modul7-page3-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.modul7-page3-subtitle {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-caption, #8199A3);
+  margin: 0;
+}
+
+.modul7-page3-title {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text-primary, #243238);
+  letter-spacing: -0.6141px;
+  line-height: 1.25;
+  text-align: center;
+  margin: 0;
+  max-width: 300px;
+}
+
+.modul7-page3-cards-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Dark Automatic Thought Card */
+.modul7-thought-card-dark {
+  width: 100%;
+  background-color: var(--color-text-primary, #243238);
+  border-radius: 12px;
+  padding: 24px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 12px rgba(36, 50, 56, 0.12);
+}
+
+.modul7-brain-img-wrap {
+  width: 75px;
+  height: 63px;
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modul7-brain-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.modul7-thought-text-dark {
+  flex: 1;
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.4437px;
+  text-align: center;
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* Dotted Arrow Connector between cards */
+.modul7-arrow-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  width: 100%;
+  margin: 4px 0;
+}
+
+/* White Fact Card */
+.modul7-fact-card-white {
+  width: 100%;
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border, rgba(20, 60, 63, 0.12));
+  border-radius: 12px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 6px rgba(20, 60, 63, 0.04);
+}
+
+.modul7-fact-card-label {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-primary, #243238);
+  letter-spacing: -0.4437px;
+  margin: 0;
+  text-align: center;
+}
+
+.modul7-fact-card-text {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary, #243238);
+  letter-spacing: -0.4437px;
+  line-height: 1.45;
+  margin: 0;
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PAGE 4: COGNITIVE DEFUSION (Figma Node 333:1784)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.modul7-page4-content {
+  padding: 16px 16px 100px 16px;
+  gap: 24px;
+}
+
+.modul7-page4-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.modul7-page4-subtitle {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-caption, #8199A3);
+  margin: 0;
+}
+
+.modul7-page4-title {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text-primary, #243238);
+  letter-spacing: -0.6141px;
+  line-height: 1.25;
+  text-align: center;
+  margin: 0;
+  max-width: 300px;
+}
+
+.modul7-page4-cards-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modul7-arrow-divider-short {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 23px;
+  width: 100%;
+  margin: 2px 0;
+}
+
+.modul7-breath-tag {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-primary, #243238);
+  letter-spacing: -0.4437px;
+  margin: 4px 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PAGE 6: TEKNIK MERESPONS KRITIK (Figma Node 334:1838)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.modul7-page6-content {
+  padding: 16px 16px 100px 16px;
+  gap: 32px;
+}
+
+.modul7-page6-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.modul7-page6-subtitle {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-caption, #8199A3);
+  margin: 0;
+}
+
+.modul7-page6-title {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text-primary, #243238);
+  letter-spacing: -0.6141px;
+  line-height: 1.25;
+  text-align: center;
+  margin: 0;
+  max-width: 310px;
+}
+
+.modul7-page6-cards-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modul7-formula-card {
+  width: 100%;
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border, rgba(20, 60, 63, 0.12));
+  border-radius: 12px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 6px rgba(20, 60, 63, 0.04);
+}
+
+.modul7-formula-num-badge {
+  width: 25px;
+  height: 25px;
+  min-width: 25px;
+  background-color: var(--color-primary, #24A981);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.4437px;
+  flex-shrink: 0;
+}
+
+.modul7-formula-text-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.modul7-formula-card-title {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-primary, #243238);
+  letter-spacing: -0.4437px;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.modul7-formula-card-desc {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-primary, #243238);
+  margin: 0;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+
+
+
