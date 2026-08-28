@@ -166,70 +166,97 @@ function ModernSliderInput({ question, value, onChange }) {
 
   const percent = ((current - min) / (max - min)) * 100;
 
+  // Dynamic theme colors: Green for calm (1-5), Orange for nervous/panic (6-10)
+  const isHighNervous = current > 5;
+  const activeColor = isHighNervous ? "var(--color-secondary, #E8753D)" : "var(--color-primary, #24A981)";
+  const activeBg = isHighNervous ? "rgba(232, 117, 61, 0.12)" : "rgba(36, 169, 129, 0.12)";
+
   // Generate tick stops
   const ticks = [];
   for (let i = min; i <= max; i++) {
     ticks.push(i);
   }
 
-  const handleTrackClick = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const ratio = Math.max(0, Math.min(1, clickX / rect.width));
-    const rawVal = Math.round(min + ratio * (max - min));
-    onChange(rawVal);
-  };
-
   return (
     <div className="modern-slider-container" data-node-id="207:3170">
-      {/* Dynamic current value display */}
-      <div className="slider-current-badge">
-        <span className="slider-badge-val">{current}</span>
+      {/* Dynamic current value display badge */}
+      <div className="slider-value-display">
+        <div
+          className="slider-value-badge"
+          style={{
+            borderColor: activeColor,
+            backgroundColor: activeBg,
+            color: activeColor,
+          }}
+        >
+          <span>Skala:</span>
+          <strong>{current} / {max}</strong>
+        </div>
       </div>
 
-      {/* Track & thumb layer */}
-      <div
-        className="slider-interactive-track"
-        onClick={handleTrackClick}
-        role="slider"
-        aria-valuenow={current}
-        aria-valuemin={min}
-        aria-valuemax={max}
-        tabIndex={0}
-      >
-        {/* Full grey rail */}
-        <div className="slider-track-bg" />
+      {/* Interactive track with dual-tone background and custom handle */}
+      <div className="slider-interactive-track">
+        <div className="slider-track-bg-left" />
+        <div className="slider-track-bg-right" />
 
-        {/* Teal active fill */}
+        {/* Dynamic active fill */}
         <div
-          className="slider-track-fill"
-          style={{ width: `${percent}%` }}
+          className="slider-track-active-fill"
+          style={{
+            width: `${percent}%`,
+            backgroundColor: activeColor,
+          }}
         />
 
-        {/* Circular Draggable Thumb */}
-        <div
-          className="slider-thumb"
-          style={{ left: `${percent}%` }}
-        />
-      </div>
+        {/* Ticks dots */}
+        <div className="slider-ticks-row">
+          {ticks.map((t) => {
+            const tPercent = ((t - min) / (max - min)) * 100;
+            const isPassed = t <= current;
+            return (
+              <span
+                key={t}
+                className="slider-tick-dot"
+                style={{
+                  left: `${tPercent}%`,
+                  backgroundColor: isPassed ? "#FFFFFF" : "rgba(36, 50, 56, 0.2)",
+                }}
+              />
+            );
+          })}
+        </div>
 
-      {/* Discrete tick points */}
-      <div className="slider-ticks-row">
-        {ticks.map((t) => (
-          <span
-            key={t}
-            className={`slider-tick ${t === current ? "active" : ""}`}
-            onClick={() => onChange(t)}
-          >
-            {t}
-          </span>
-        ))}
+        {/* Custom Draggable Thumb */}
+        <div
+          className="slider-custom-thumb"
+          style={{
+            left: `${percent}%`,
+            borderColor: activeColor,
+          }}
+        >
+          <div
+            className="slider-thumb-inner"
+            style={{ backgroundColor: activeColor }}
+          />
+        </div>
+
+        {/* Invisible native range input overlay for 100% touch & drag accuracy */}
+        <input
+          type="range"
+          min={min}
+          max={max}
+          step={1}
+          value={current}
+          onChange={(e) => onChange(Number(e.target.value))}
+          className="slider-range-overlay"
+          aria-label={question.title}
+        />
       </div>
 
       {/* Bottom min / max descriptive labels */}
-      <div className="slider-labels-row">
-        <span className="slider-label-min">{question.minLabel}</span>
-        <span className="slider-label-max">{question.maxLabel}</span>
+      <div className="slider-bottom-labels">
+        <span className="slider-bottom-min">{question.minLabel}</span>
+        <span className="slider-bottom-max">{question.maxLabel}</span>
       </div>
     </div>
   );
