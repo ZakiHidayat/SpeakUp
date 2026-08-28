@@ -766,6 +766,61 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   PAGE 8: TEMA LATIHAN (Figma Node 338:1946)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.modul7-page8-content {
+  padding: 16px 20px 100px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.modul7-page8-theme-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  margin: auto 0;
+  width: 100%;
+  max-width: 320px;
+  box-sizing: border-box;
+}
+
+.modul7-page8-theme-subtitle {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-caption, #8199A3);
+  letter-spacing: -0.4437px;
+  margin: 0;
+  text-align: center;
+}
+
+.modul7-page8-theme-title {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.522px;
+  line-height: 1.4;
+  text-align: center;
+  margin: 0;
+}
+
+.modul7-page8-countdown-text {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-caption, #8199A3);
+  text-align: center;
+  margin: 0 0 16px 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    COMPLETED LESSON GAIN XP SCREEN
    ═══════════════════════════════════════════════════════════════════════════ */
 .lesson-completed-screen {
