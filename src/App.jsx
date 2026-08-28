@@ -7,6 +7,7 @@ import AIAnalysis from "./components/AIAnalysis";
 import RegisterForm from "./components/RegisterForm";
 import WelcomingScreen from "./components/WelcomingScreen";
 import HomeScreen from "./components/HomeScreen";
+import SimulasiScreen from "./components/SimulasiScreen";
 import PracticeZone from "./components/PracticeZone";
 import LiveRoomScreen from "./components/LiveRoomScreen";
 import ModuleDetailScreen from "./components/ModuleDetailScreen";
@@ -90,8 +91,7 @@ function App() {
   };
 
   const handleNavigatePractice = () => {
-    setPracticeMode("solo");
-    setCurrentScreen("practice");
+    setCurrentScreen("simulasi");
   };
 
   const handleNavigateGroup = () => {
@@ -139,6 +139,14 @@ function App() {
           userName={userProfile.name}
           onSelectModule={handleSelectModule}
           onNavigatePractice={handleNavigatePractice}
+          onNavigateGroup={handleNavigateGroup}
+          onNavigateProfile={() => alert("Halaman Profil Segera Hadir!")}
+        />
+      )}
+
+      {currentScreen === "simulasi" && (
+        <SimulasiScreen
+          onNavigateHome={() => setCurrentScreen("home")}
           onNavigateGroup={handleNavigateGroup}
           onNavigateProfile={() => alert("Halaman Profil Segera Hadir!")}
         />
