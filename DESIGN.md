@@ -23,7 +23,7 @@ Semua warna didefinisikan sebagai CSS Custom Properties di `:root`. Untuk menamb
 | **XP / Reward** | `#E8A63D` | `--color-xp` | Gamifikasi, poin XP, streak, rating bintang, achievement |
 | **Text Primary** | `#243238` | `--color-text-primary` | Teks utama, judul (H1–H4), label penting, fill container tag "Testing Available" |
 | **Text Secondary** | `#CD4300` / `#DA5000` | `--color-text-secondary` | Teks penekanan khusus, peringatan bernuansa oranye, link aktif |
-| **Text Caption** | `#8199A3` | `--color-text-caption` | Teks keterangan, timestamp, sub-label, placeholder |
+| **Text Caption** | `#889398` | `--color-text-caption` | Teks keterangan, timestamp, sub-label, placeholder |
 | **Background** | `#FAF8F3` | `--color-bg-app` | Warna latar belakang kanvas aplikasi |
 | **Surface** | `#FFFFFF` | `--color-surface` | Latar kartu (card), modal, sheet, bottom navigation |
 | **Border** | `#143C3F1F` | `--color-border` | Garis pembatas kartu & input (`rgba(20, 60, 63, 0.12)`) |
@@ -140,7 +140,7 @@ Semua definisi di atas dapat langsung diakses via variabel CSS berikut:
   --color-hero-modul7: #7C4E28;
   --color-text-primary: #243238;
   --color-text-secondary: #CD4300;
-  --color-text-caption: #8199A3;
+  --color-text-caption: #889398;
   --color-bg-app: #FAF8F3;
   --color-surface: #FFFFFF;
   --color-border: rgba(20, 60, 63, 0.12);
