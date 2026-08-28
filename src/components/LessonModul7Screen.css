@@ -1442,8 +1442,8 @@
 
 .modul7-page17-video-wrapper {
   width: 100%;
-  height: 360px;
-  max-height: 380px;
+  height: 421px;
+  max-height: 421px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1502,18 +1502,6 @@
   margin: 0;
   line-height: 1.25;
   text-align: center;
-}
-
-.modul7-page17-caption {
-  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--color-text-caption, #8199A3);
-  letter-spacing: -0.2px;
-  margin: 0;
-  max-width: 290px;
-  text-align: center;
-  line-height: 1.45;
 }
 
 .modul7-page17-caption {
