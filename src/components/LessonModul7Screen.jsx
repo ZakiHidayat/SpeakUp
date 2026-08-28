@@ -587,6 +587,11 @@ function LessonPage8({ onNext, onBack }) {
 // ─── Page 9: Waktu Persiapan & Kerangka Cepat (Figma node 339:2254) ────────────
 function LessonPage9({ onNext, onBack }) {
   const [secondsLeft, setSecondsLeft] = useState(120);
+  const [notes, setNotes] = useState({
+    point1: "",
+    point2: "",
+    point3: "",
+  });
 
   useEffect(() => {
     if (secondsLeft <= 0) return;
@@ -600,6 +605,10 @@ function LessonPage9({ onNext, onBack }) {
     const m = Math.floor(sec / 60);
     const s = sec % 60;
     return `${m}:${s < 10 ? "0" : ""}${s}`;
+  };
+
+  const handleNoteChange = (key, value) => {
+    setNotes((prev) => ({ ...prev, [key]: value }));
   };
 
   return (
@@ -639,33 +648,48 @@ function LessonPage9({ onNext, onBack }) {
           </div>
 
           {/* Card 1 */}
-          <div className="modul7-page9-framework-card" data-node-id="339:2277">
+          <div className={`modul7-page9-framework-card ${notes.point1 ? "has-value" : ""}`} data-node-id="339:2277">
             <div className="modul7-framework-badge" data-node-id="339:2278">
               1
             </div>
-            <p className="modul7-framework-card-text" data-node-id="339:2315">
-              Pendapat utama: aku setuju/tidak setuju karena...
-            </p>
+            <textarea
+              className="modul7-framework-textarea"
+              placeholder="Pendapat utama: aku setuju/tidak setuju karena..."
+              value={notes.point1}
+              onChange={(e) => handleNoteChange("point1", e.target.value)}
+              rows={2}
+              data-node-id="339:2315"
+            />
           </div>
 
           {/* Card 2 */}
-          <div className="modul7-page9-framework-card" data-node-id="339:2283">
+          <div className={`modul7-page9-framework-card ${notes.point2 ? "has-value" : ""}`} data-node-id="339:2283">
             <div className="modul7-framework-badge" data-node-id="339:2284">
               2
             </div>
-            <p className="modul7-framework-card-text" data-node-id="339:2317">
-              Alasan atau contoh yang mendukung...
-            </p>
+            <textarea
+              className="modul7-framework-textarea"
+              placeholder="Alasan atau contoh yang mendukung..."
+              value={notes.point2}
+              onChange={(e) => handleNoteChange("point2", e.target.value)}
+              rows={2}
+              data-node-id="339:2317"
+            />
           </div>
 
           {/* Card 3 */}
-          <div className="modul7-page9-framework-card" data-node-id="339:2289">
+          <div className={`modul7-page9-framework-card ${notes.point3 ? "has-value" : ""}`} data-node-id="339:2289">
             <div className="modul7-framework-badge" data-node-id="339:2290">
               3
             </div>
-            <p className="modul7-framework-card-text" data-node-id="339:2320">
-              Kesimpulan atau solusi yang bisa dilakukan...
-            </p>
+            <textarea
+              className="modul7-framework-textarea"
+              placeholder="Kesimpulan atau solusi yang bisa dilakukan..."
+              value={notes.point3}
+              onChange={(e) => handleNoteChange("point3", e.target.value)}
+              rows={2}
+              data-node-id="339:2320"
+            />
           </div>
         </div>
       </div>
