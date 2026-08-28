@@ -9,6 +9,7 @@ import imgGakKompeten from "../assets/pages_assets/lessons/lesson-6-modul7/Image
 import imgBrain from "../assets/pages_assets/lessons/lesson-6-modul7/Image-Brain.png";
 import imgMascottQuotes from "../assets/pages_assets/lessons/lesson-6-modul7/Image-Mascott-Quotes.png";
 import imgMascottSenyum from "../assets/pages_assets/lessons/lesson-6-modul7/Image-Mascott-SenyumJahat.png";
+import imgMascottSedih from "../assets/pages_assets/lessons/lesson-6-modul7/Image-Mascott-Sedih.png";
 import videoHappySpeaker from "../assets/pages_assets/lessons/lesson-6-modul7/Video-Happy-Speaker.webm";
 import videoGainXP from "../assets/pages_assets/gain_xp/Video-Gain-XP.webm";
 
@@ -41,6 +42,72 @@ function LessonTopBar({ currentStep, totalSteps, onTopBarBack, isDark = false })
             data-node-id="329:1667"
           />
         </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── No Voice Detected Screen (Figma node 379:3771) ──────────────────────────
+function NoVoiceDetectedScreen({
+  counter = null, // "1/2" | "2/2" | null
+  currentStep,
+  totalSteps = 17,
+  secondaryText = "Aku tidak tahu jawabannya",
+  onRetry,
+  onSecondaryAction,
+  onTopBarBack,
+}) {
+  return (
+    <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="379:3771" data-name="Lesson-Hadapi Pertanyaan Menantang">
+      <LessonTopBar currentStep={currentStep} totalSteps={totalSteps} onTopBarBack={onTopBarBack} isDark={true} />
+
+      <div className="modul7-lesson-content modul7-page-novoice-content" data-node-id="379:3772">
+        {/* Step Counter if applicable */}
+        {counter && (
+          <p className="modul7-novoice-counter" data-node-id="379:3791">
+            {counter}
+          </p>
+        )}
+
+        {/* Mascot Sedih Stage Illustration */}
+        <div className="modul7-page-novoice-hero-wrapper" data-node-id="379:3773">
+          <img
+            src={imgMascottSedih}
+            alt="Suaramu tidak terdengar"
+            className="modul7-page-novoice-hero-img"
+            data-node-id="379:3774"
+          />
+        </div>
+
+        {/* Text Section */}
+        <div className="modul7-page-novoice-text-wrapper" data-node-id="379:3777">
+          <h2 className="modul7-page-novoice-title" data-node-id="379:3778">
+            Suaramu tidak terdengar...
+          </h2>
+          <p className="modul7-page-novoice-subtitle" data-node-id="379:3779">
+            Pastikan mikrofonmu aktif dan tidak tertutup. Kalau semuanya sudah siap, kita bisa mulai lagi.
+          </p>
+        </div>
+      </div>
+
+      {/* Action Buttons Footer */}
+      <div className="modul7-page-novoice-footer" data-node-id="379:3795">
+        <button
+          type="button"
+          className="btn-modul7-next"
+          onClick={onRetry}
+          data-node-id="379:3796"
+        >
+          Ulangi lagi
+        </button>
+        <button
+          type="button"
+          className="btn-modul7-text-secondary"
+          onClick={onSecondaryAction}
+          data-node-id="379:3798"
+        >
+          {secondaryText}
+        </button>
       </div>
     </div>
   );
@@ -716,13 +783,19 @@ function LessonPage9({ onNext, onBack, onTopBarBack }) {
 function LessonPage10({ onNext, onBack, onTopBarBack }) {
   const [secondsLeft, setSecondsLeft] = useState(120);
   const [audioLevels, setAudioLevels] = useState([39, 15, 26, 26, 39]);
+  const [showNoVoice, setShowNoVoice] = useState(false);
+  const [audioKey, setAudioKey] = useState(0);
+
   const audioContextRef = useRef(null);
   const analyserRef = useRef(null);
   const streamRef = useRef(null);
   const animationFrameRef = useRef(null);
+  const hasSpokenRef = useRef(false);
+  const speechCountRef = useRef(0);
 
   // Timer countdown
   useEffect(() => {
+    if (showNoVoice) return;
     if (secondsLeft <= 0) {
       handleFinish();
       return;
@@ -731,10 +804,11 @@ function LessonPage10({ onNext, onBack, onTopBarBack }) {
       setSecondsLeft((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
     return () => clearInterval(timer);
-  }, [secondsLeft]);
+  }, [secondsLeft, showNoVoice]);
 
   // Real Microphone Stream & Wave Analyzer
   useEffect(() => {
+    if (showNoVoice) return;
     let isMounted = true;
 
     async function initAudio() {
@@ -770,6 +844,14 @@ function LessonPage10({ onNext, onBack, onTopBarBack }) {
           const b3 = dataArray[6] || 0;
           const b4 = dataArray[9] || 0;
           const b5 = dataArray[12] || 0;
+
+          const avgVol = (b1 + b2 + b3 + b4 + b5) / 5;
+          if (avgVol > 20) {
+            speechCountRef.current = (speechCountRef.current || 0) + 1;
+            if (speechCountRef.current >= 6) {
+              hasSpokenRef.current = true;
+            }
+          }
 
           const rawBands = [b1, b2, b3, b4, b5];
           const newLevels = rawBands.map((val) => {
@@ -811,38 +893,46 @@ function LessonPage10({ onNext, onBack, onTopBarBack }) {
         audioContextRef.current.close().catch(() => {});
       }
     };
-  }, []);
+  }, [showNoVoice, audioKey]);
 
-  const handleFinish = () => {
+  const cleanAudio = () => {
     if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     if (streamRef.current) {
       streamRef.current.getTracks().forEach((t) => t.stop());
     }
     if (audioContextRef.current && audioContextRef.current.state !== "closed") {
       audioContextRef.current.close().catch(() => {});
+    }
+  };
+
+  const handleFinish = () => {
+    cleanAudio();
+    if (!hasSpokenRef.current) {
+      setShowNoVoice(true);
+      return;
     }
     onNext();
   };
 
+  const handleRetry = () => {
+    setShowNoVoice(false);
+    setSecondsLeft(120);
+    hasSpokenRef.current = false;
+    speechCountRef.current = 0;
+    setAudioKey((k) => k + 1);
+  };
+
+  const handleSecondaryContinue = () => {
+    onNext();
+  };
+
   const handleBackAction = () => {
-    if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach((t) => t.stop());
-    }
-    if (audioContextRef.current && audioContextRef.current.state !== "closed") {
-      audioContextRef.current.close().catch(() => {});
-    }
+    cleanAudio();
     onBack();
   };
 
   const handleTopBarBackAction = () => {
-    if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach((t) => t.stop());
-    }
-    if (audioContextRef.current && audioContextRef.current.state !== "closed") {
-      audioContextRef.current.close().catch(() => {});
-    }
+    cleanAudio();
     onTopBarBack();
   };
 
@@ -851,6 +941,20 @@ function LessonPage10({ onNext, onBack, onTopBarBack }) {
     const s = sec % 60;
     return `${m}:${s < 10 ? "0" : ""}${s}`;
   };
+
+  if (showNoVoice) {
+    return (
+      <NoVoiceDetectedScreen
+        counter={null}
+        currentStep={10}
+        totalSteps={17}
+        secondaryText="Tidak tahu apa yang harus disampaikan"
+        onRetry={handleRetry}
+        onSecondaryAction={handleSecondaryContinue}
+        onTopBarBack={handleTopBarBackAction}
+      />
+    );
+  }
 
   return (
     <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="339:2362" data-name="Lesson-Hadapi Pertanyaan Menantang">
@@ -1009,13 +1113,19 @@ function LessonPage12({ onNext, onBack, onTopBarBack }) {
 function LessonPage13({ onNext, onBack, onTopBarBack }) {
   const [secondsLeft, setSecondsLeft] = useState(60);
   const [audioLevels, setAudioLevels] = useState([39, 15, 26, 26, 39]);
+  const [showNoVoice, setShowNoVoice] = useState(false);
+  const [audioKey, setAudioKey] = useState(0);
+
   const audioContextRef = useRef(null);
   const analyserRef = useRef(null);
   const streamRef = useRef(null);
   const animationFrameRef = useRef(null);
+  const hasSpokenRef = useRef(false);
+  const speechCountRef = useRef(0);
 
   // Timer countdown
   useEffect(() => {
+    if (showNoVoice) return;
     if (secondsLeft <= 0) {
       handleFinish();
       return;
@@ -1024,10 +1134,11 @@ function LessonPage13({ onNext, onBack, onTopBarBack }) {
       setSecondsLeft((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
     return () => clearInterval(timer);
-  }, [secondsLeft]);
+  }, [secondsLeft, showNoVoice]);
 
   // Real Microphone Stream & Wave Analyzer
   useEffect(() => {
+    if (showNoVoice) return;
     let isMounted = true;
 
     async function initAudio() {
@@ -1063,6 +1174,14 @@ function LessonPage13({ onNext, onBack, onTopBarBack }) {
           const b3 = dataArray[6] || 0;
           const b4 = dataArray[9] || 0;
           const b5 = dataArray[12] || 0;
+
+          const avgVol = (b1 + b2 + b3 + b4 + b5) / 5;
+          if (avgVol > 20) {
+            speechCountRef.current = (speechCountRef.current || 0) + 1;
+            if (speechCountRef.current >= 6) {
+              hasSpokenRef.current = true;
+            }
+          }
 
           const rawBands = [b1, b2, b3, b4, b5];
           const newLevels = rawBands.map((val) => {
@@ -1104,38 +1223,46 @@ function LessonPage13({ onNext, onBack, onTopBarBack }) {
         audioContextRef.current.close().catch(() => {});
       }
     };
-  }, []);
+  }, [showNoVoice, audioKey]);
 
-  const handleFinish = () => {
+  const cleanAudio = () => {
     if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     if (streamRef.current) {
       streamRef.current.getTracks().forEach((t) => t.stop());
     }
     if (audioContextRef.current && audioContextRef.current.state !== "closed") {
       audioContextRef.current.close().catch(() => {});
+    }
+  };
+
+  const handleFinish = () => {
+    cleanAudio();
+    if (!hasSpokenRef.current) {
+      setShowNoVoice(true);
+      return;
     }
     onNext();
   };
 
+  const handleRetry = () => {
+    setShowNoVoice(false);
+    setSecondsLeft(60);
+    hasSpokenRef.current = false;
+    speechCountRef.current = 0;
+    setAudioKey((k) => k + 1);
+  };
+
+  const handleSecondaryContinue = () => {
+    onNext();
+  };
+
   const handleBackAction = () => {
-    if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach((t) => t.stop());
-    }
-    if (audioContextRef.current && audioContextRef.current.state !== "closed") {
-      audioContextRef.current.close().catch(() => {});
-    }
+    cleanAudio();
     onBack();
   };
 
   const handleTopBarBackAction = () => {
-    if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach((t) => t.stop());
-    }
-    if (audioContextRef.current && audioContextRef.current.state !== "closed") {
-      audioContextRef.current.close().catch(() => {});
-    }
+    cleanAudio();
     onTopBarBack();
   };
 
@@ -1144,6 +1271,20 @@ function LessonPage13({ onNext, onBack, onTopBarBack }) {
     const s = sec % 60;
     return `${m}:${s < 10 ? "0" : ""}${s}`;
   };
+
+  if (showNoVoice) {
+    return (
+      <NoVoiceDetectedScreen
+        counter="1/2"
+        currentStep={13}
+        totalSteps={17}
+        secondaryText="Aku tidak tahu jawabannya"
+        onRetry={handleRetry}
+        onSecondaryAction={handleSecondaryContinue}
+        onTopBarBack={handleTopBarBackAction}
+      />
+    );
+  }
 
   return (
     <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="339:2489" data-name="Lesson-Hadapi Pertanyaan Menantang">
@@ -1307,13 +1448,19 @@ function LessonPage15({ onNext, onBack, onTopBarBack }) {
 function LessonPage16({ onNext, onBack, onTopBarBack }) {
   const [secondsLeft, setSecondsLeft] = useState(60);
   const [audioLevels, setAudioLevels] = useState([39, 15, 26, 26, 39]);
+  const [showNoVoice, setShowNoVoice] = useState(false);
+  const [audioKey, setAudioKey] = useState(0);
+
   const audioContextRef = useRef(null);
   const analyserRef = useRef(null);
   const streamRef = useRef(null);
   const animationFrameRef = useRef(null);
+  const hasSpokenRef = useRef(false);
+  const speechCountRef = useRef(0);
 
   // Timer countdown
   useEffect(() => {
+    if (showNoVoice) return;
     if (secondsLeft <= 0) {
       handleFinish();
       return;
@@ -1322,10 +1469,11 @@ function LessonPage16({ onNext, onBack, onTopBarBack }) {
       setSecondsLeft((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
     return () => clearInterval(timer);
-  }, [secondsLeft]);
+  }, [secondsLeft, showNoVoice]);
 
   // Real Microphone Stream & Wave Analyzer
   useEffect(() => {
+    if (showNoVoice) return;
     let isMounted = true;
 
     async function initAudio() {
@@ -1361,6 +1509,14 @@ function LessonPage16({ onNext, onBack, onTopBarBack }) {
           const b3 = dataArray[6] || 0;
           const b4 = dataArray[9] || 0;
           const b5 = dataArray[12] || 0;
+
+          const avgVol = (b1 + b2 + b3 + b4 + b5) / 5;
+          if (avgVol > 20) {
+            speechCountRef.current = (speechCountRef.current || 0) + 1;
+            if (speechCountRef.current >= 6) {
+              hasSpokenRef.current = true;
+            }
+          }
 
           const rawBands = [b1, b2, b3, b4, b5];
           const newLevels = rawBands.map((val) => {
@@ -1402,38 +1558,46 @@ function LessonPage16({ onNext, onBack, onTopBarBack }) {
         audioContextRef.current.close().catch(() => {});
       }
     };
-  }, []);
+  }, [showNoVoice, audioKey]);
 
-  const handleFinish = () => {
+  const cleanAudio = () => {
     if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     if (streamRef.current) {
       streamRef.current.getTracks().forEach((t) => t.stop());
     }
     if (audioContextRef.current && audioContextRef.current.state !== "closed") {
       audioContextRef.current.close().catch(() => {});
+    }
+  };
+
+  const handleFinish = () => {
+    cleanAudio();
+    if (!hasSpokenRef.current) {
+      setShowNoVoice(true);
+      return;
     }
     onNext();
   };
 
+  const handleRetry = () => {
+    setShowNoVoice(false);
+    setSecondsLeft(60);
+    hasSpokenRef.current = false;
+    speechCountRef.current = 0;
+    setAudioKey((k) => k + 1);
+  };
+
+  const handleSecondaryContinue = () => {
+    onNext();
+  };
+
   const handleBackAction = () => {
-    if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach((t) => t.stop());
-    }
-    if (audioContextRef.current && audioContextRef.current.state !== "closed") {
-      audioContextRef.current.close().catch(() => {});
-    }
+    cleanAudio();
     onBack();
   };
 
   const handleTopBarBackAction = () => {
-    if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach((t) => t.stop());
-    }
-    if (audioContextRef.current && audioContextRef.current.state !== "closed") {
-      audioContextRef.current.close().catch(() => {});
-    }
+    cleanAudio();
     onTopBarBack();
   };
 
@@ -1442,6 +1606,20 @@ function LessonPage16({ onNext, onBack, onTopBarBack }) {
     const s = sec % 60;
     return `${m}:${s < 10 ? "0" : ""}${s}`;
   };
+
+  if (showNoVoice) {
+    return (
+      <NoVoiceDetectedScreen
+        counter="2/2"
+        currentStep={16}
+        totalSteps={17}
+        secondaryText="Aku tidak tahu jawabannya"
+        onRetry={handleRetry}
+        onSecondaryAction={handleSecondaryContinue}
+        onTopBarBack={handleTopBarBackAction}
+      />
+    );
+  }
 
   return (
     <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="339:2580" data-name="Lesson-Hadapi Pertanyaan Menantang">
