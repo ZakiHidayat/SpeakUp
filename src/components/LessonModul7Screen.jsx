@@ -183,6 +183,33 @@ function LessonPage1({ onNext, onTopBarBack }) {
   );
 }
 
+// ─── Fast Typewriter Animated Text Component ─────────────────────────────────
+function TypewriterText({ text, speed = 16, className, dataNodeId }) {
+  const [displayedText, setDisplayedText] = useState("");
+
+  useEffect(() => {
+    let index = 0;
+    setDisplayedText("");
+
+    const interval = setInterval(() => {
+      index++;
+      if (index <= text.length) {
+        setDisplayedText(text.slice(0, index));
+      } else {
+        clearInterval(interval);
+      }
+    }, speed);
+
+    return () => clearInterval(interval);
+  }, [text, speed]);
+
+  return (
+    <p className={className} data-node-id={dataNodeId}>
+      {displayedText}
+    </p>
+  );
+}
+
 // ─── Page 2: Quotes / Mindset (Figma node 329:1710) ──────────────────────────
 function LessonPage2({ onNext, onBack, onTopBarBack }) {
   return (
@@ -191,9 +218,12 @@ function LessonPage2({ onNext, onBack, onTopBarBack }) {
 
       {/* Center Quotes Area */}
       <div className="modul7-page2-content" data-node-id="329:1719">
-        <p className="modul7-page2-quote text-quotes" data-node-id="329:1720">
-          ”Pertanyaan menantang bukan serangan. Itu tanda audiens peduli dan pengin denger sudut pandangmu.”
-        </p>
+        <TypewriterText
+          text="”Pertanyaan menantang bukan serangan. Itu tanda audiens peduli dan pengin denger sudut pandangmu.”"
+          speed={16}
+          className="modul7-page2-quote text-quotes"
+          dataNodeId="329:1720"
+        />
       </div>
 
       {/* Bottom Mascot Illustration */}
@@ -400,9 +430,12 @@ function LessonPage5({ onNext, onBack, onTopBarBack }) {
 
       {/* Center Quotes Area */}
       <div className="modul7-page2-content" data-node-id="334:1825">
-        <p className="modul7-page2-quote text-quotes" data-node-id="334:1826">
-          ”Saat pertanyaan sulit datang, pikiranmu akan mencoba membunyikan alarm palsu. Uji faktanya atau beri jarak pada paniknya. Ingat: kamu adalah pengendali panggungmu, bukan tawanan dari pikiranmu sendiri.”
-        </p>
+        <TypewriterText
+          text="”Saat pertanyaan sulit datang, pikiranmu akan mencoba membunyikan alarm palsu. Uji faktanya atau beri jarak pada paniknya. Ingat: kamu adalah pengendali panggungmu, bukan tawanan dari pikiranmu sendiri.”"
+          speed={12}
+          className="modul7-page2-quote text-quotes"
+          dataNodeId="334:1826"
+        />
       </div>
 
       {/* Bottom Mascot Illustration */}
