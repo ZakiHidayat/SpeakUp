@@ -7,8 +7,6 @@ import imgPanik from "../assets/pages_assets/lessons/lesson-6-modul7/Image-Panik
 import imgGakKompeten from "../assets/pages_assets/lessons/lesson-6-modul7/Image-GakKompeten-Page1.png";
 import imgBrain from "../assets/pages_assets/lessons/lesson-6-modul7/Image-Brain.png";
 import imgMascottQuotes from "../assets/pages_assets/lessons/lesson-6-modul7/Image-Mascott-Quotes.png";
-import imgMascottSenyum from "../assets/pages_assets/lessons/lesson-6-modul7/Image-Mascott-SenyumJahat.png";
-import videoHappySpeaker from "../assets/pages_assets/lessons/lesson-6-modul7/Video-Happy-Speaker.webm";
 import videoGainXP from "../assets/pages_assets/gain_xp/Video-Gain-XP.webm";
 
 // ─── Back Arrow Icon ─────────────────────────────────────────────────────────
@@ -171,45 +169,40 @@ function LessonPage3({ onNext, onBack }) {
         {/* Title Header */}
         <div className="modul7-page3-header" data-node-id="329:1743">
           <p className="modul7-page3-subtitle" data-node-id="329:1744">
-            Uji Fakta (Cognitive Restructuring)
+            Cognitive Restructuring
           </p>
           <h2 className="modul7-page3-title" data-node-id="329:1745">
-            Pikiranmu suka melebih-lebihkan
+            Pikiran itu belum tentu fakta
           </h2>
         </div>
 
         {/* Thought & Fact Flow Cards */}
-        <div className="modul7-page3-flow" data-node-id="329:1747">
+        <div className="modul7-page3-cards-container" data-node-id="329:1747">
           {/* Card 1: Dark thought card */}
-          <div className="modul7-thought-card" data-node-id="329:1748">
-            <div className="modul7-brain-img-wrapper" data-node-id="329:1749">
+          <div className="modul7-thought-card-dark" data-node-id="329:1748">
+            <div className="modul7-brain-img-wrap" data-node-id="329:1749">
               <img src={imgBrain} alt="Brain" className="modul7-brain-img" />
             </div>
-            <div className="modul7-thought-text-wrapper" data-node-id="329:1751">
-              <p className="modul7-thought-label" data-node-id="329:1752">
-                Pikiran otomatis:
-              </p>
-              <p className="modul7-thought-content" data-node-id="329:1753">
-                ”Gue harus tahu semua jawaban. Kalau nggak bisa, gue gagal total.”
-              </p>
-            </div>
+            <p className="modul7-thought-text-dark" data-node-id="329:1753">
+              “Mereka pasti menilaiku buruk karena aku nggak bisa langsung menjawab pertanyaan ini.”
+            </p>
           </div>
 
           {/* Dotted Arrow Down */}
-          <div className="modul7-dotted-arrow-wrapper" data-node-id="333:1783">
-            <svg width="24" height="48" viewBox="0 0 24 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 0V40" stroke="#243238" strokeWidth="2.5" strokeDasharray="4 4" strokeLinecap="round"/>
-              <path d="M6 34L12 42L18 34" stroke="#243238" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <div className="modul7-arrow-divider" data-node-id="333:1783">
+            <svg width="24" height="34" viewBox="0 0 24 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0V26" stroke="#243238" strokeWidth="2" strokeDasharray="3 3" strokeLinecap="round"/>
+              <path d="M7 21L12 28L17 21" stroke="#243238" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
 
           {/* Card 2: White fact card */}
-          <div className="modul7-fact-card" data-node-id="329:1754">
-            <p className="modul7-fact-label" data-node-id="329:1755">
-              Faktanya:
+          <div className="modul7-fact-card-white" data-node-id="329:1754">
+            <p className="modul7-fact-card-label" data-node-id="329:1755">
+              Fakta Sebenarnya
             </p>
-            <p className="modul7-fact-content" data-node-id="329:1756">
-              Audiens menghargai kejujuran. Nggak tahu bukan berarti nggak kompeten — itu kesempatan buat eksplorasi bareng.
+            <p className="modul7-fact-card-text" data-node-id="329:1756">
+              “Orang lain paham ini pertanyaan sulit. Yang paling penting bukan kecepatan menjawab, tapi kemampuanku untuk tetap tenang dan fokus memprosesnya.”
             </p>
           </div>
         </div>
@@ -249,55 +242,57 @@ function LessonPage4({ onNext, onBack }) {
         {/* Header */}
         <div className="modul7-page4-header" data-node-id="333:1787">
           <p className="modul7-page4-subtitle" data-node-id="333:1788">
-            Beri Jarak (Cognitive Defusion)
+            Cognitive Defusion
           </p>
           <h2 className="modul7-page4-title" data-node-id="333:1789">
-            Kamu bukan pikiranmu
+            Kamu nggak harus percaya tiap pikiran
           </h2>
         </div>
 
         {/* 3 Step Flow */}
-        <div className="modul7-page4-flow" data-node-id="333:1791">
+        <div className="modul7-page4-cards-container" data-node-id="333:1791">
           {/* 1. Dark Thought Card */}
-          <div className="modul7-defusion-thought-card" data-node-id="333:1792">
-            <div className="modul7-mascot-senyum-wrapper" data-node-id="333:1793">
+          <div className="modul7-thought-card-dark" data-node-id="333:1792">
+            <div className="modul7-brain-img-wrap" data-node-id="333:1793">
               <img
-                src={imgMascottSenyum}
-                alt="Mascot Senyum Jahat"
-                className="modul7-mascot-senyum-img"
+                src={imgBrain}
+                alt="Brain"
+                className="modul7-brain-img"
               />
             </div>
-            <p className="modul7-defusion-thought-text" data-node-id="333:1795">
-              ”Pertanyaan ini jebakan. Dia pengin bikin gue malu.”
+            <p className="modul7-thought-text-dark" data-node-id="333:1795">
+              “Gila, aku diam kelamaan pas ditanya. Habis sudah reputasiku, presentasiku pasti dianggap gagal total.”
             </p>
           </div>
 
           {/* Dotted Arrow 1 */}
-          <div className="modul7-short-dotted-arrow">
-            <svg width="24" height="28" viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 0V20" stroke="#243238" strokeWidth="2.5" strokeDasharray="3 3" strokeLinecap="round"/>
-              <path d="M7 16L12 22L17 16" stroke="#243238" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <div className="modul7-arrow-divider-short">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0V16" stroke="#243238" strokeWidth="2" strokeDasharray="3 3" strokeLinecap="round"/>
+              <path d="M7 12L12 18L17 12" stroke="#243238" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
 
-          {/* 2. Center Pill: Ambil napas */}
-          <div className="modul7-breath-pill" data-node-id="333:1797">
-            <span>Ambil napas</span>
-            <span className="modul7-breath-emoji">🧘</span>
-          </div>
+          {/* 2. Center Text: Ambil napas */}
+          <p className="modul7-breath-tag" data-node-id="333:1797">
+            Ambil napas 🧘
+          </p>
 
           {/* Dotted Arrow 2 */}
-          <div className="modul7-short-dotted-arrow">
-            <svg width="24" height="28" viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 0V20" stroke="#243238" strokeWidth="2.5" strokeDasharray="3 3" strokeLinecap="round"/>
-              <path d="M7 16L12 22L17 16" stroke="#243238" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <div className="modul7-arrow-divider-short">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0V16" stroke="#243238" strokeWidth="2" strokeDasharray="3 3" strokeLinecap="round"/>
+              <path d="M7 12L12 18L17 12" stroke="#243238" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
 
           {/* 3. White Reframed Thought Card */}
-          <div className="modul7-reframed-card" data-node-id="333:1799">
-            <p className="modul7-reframed-text" data-node-id="333:1800">
-              ”Aku lagi ngerasa terancam, padahal ini cuma pertanyaan biasa.”
+          <div className="modul7-reframed-card-white" data-node-id="333:1799">
+            <p className="modul7-reframed-card-label">
+              Ubah menjadi...
+            </p>
+            <p className="modul7-reframed-card-text" data-node-id="333:1800">
+              ”Aku sedang mengamati pikiranku yang lagi muterin skenario ’reputasiku hancur’ hanya karena aku butuh waktu 5 detik untuk mikir.”
             </p>
           </div>
         </div>

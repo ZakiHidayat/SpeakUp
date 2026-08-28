@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Lesson 6 Modul 7 - Hadapi Pertanyaan Menantang (Figma Node 329:1659)
+   Lesson 6 Modul 7 - Hadapi Pertanyaan Menantang (Figma 329:1659 - 338:1896)
    ========================================================================== */
 
 .modul7-lesson-screen {
@@ -123,7 +123,7 @@
   box-sizing: border-box;
 }
 
-/* ── Feeling Cards ────────────────────────────────────────────────────────── */
+/* ── Feeling Cards (Page 1) ────────────────────────────────────────────────── */
 .modul7-feeling-card {
   width: 100%;
   min-height: 122px;
@@ -183,22 +183,23 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 12px 16px 40px 16px;
-  background: linear-gradient(180deg, rgba(250, 248, 243, 0) 0%, rgba(250, 248, 243, 0.95) 25%, #FAF8F3 100%);
+  padding: 16px 16px 40px 16px;
   display: flex;
+  align-items: center;
   justify-content: center;
   box-sizing: border-box;
   z-index: 10;
+  width: 100%;
 }
 
 .btn-modul7-next {
   width: 100%;
-  max-width: 366px;
+  max-width: 358px;
   height: 46px;
   background-color: var(--color-secondary, #E8753D);
-  border: 1px solid #8B4827;
+  border: 1px solid var(--color-secondary-dark, #8B4827);
   border-radius: 34px;
-  box-shadow: 0px 4px 0px 0px #8B4827;
+  box-shadow: 0px 4px 0px 0px var(--color-secondary-dark, #8B4827);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -207,9 +208,10 @@
   font-size: 14px;
   font-weight: 700;
   color: #FFFFFF;
-  white-space: nowrap;
+  letter-spacing: 0px;
   transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.15s ease;
   -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
 }
 
 .btn-modul7-next:hover {
@@ -218,30 +220,25 @@
 
 .btn-modul7-next:active {
   transform: translateY(2px);
-  box-shadow: 0px 2px 0px 0px #8B4827;
+  box-shadow: 0px 2px 0px 0px var(--color-secondary-dark, #8B4827);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   PAGE 2: QUOTES & MINDSET (Figma Node 329:1710)
+   PAGE 2 & PAGE 5: QUOTES / MINDSET (Figma Node 329:1710 & 334:1816)
    ═══════════════════════════════════════════════════════════════════════════ */
 .modul7-lesson-page-2 {
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  position: relative;
-  height: 100%;
-  overflow: hidden;
 }
 
 .modul7-page2-content {
   flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 24px 24px 100px 24px;
-  position: relative;
-  z-index: 5;
+  padding: 24px 24px 200px 24px;
   box-sizing: border-box;
+  z-index: 3;
 }
 
 .modul7-page2-quote {
@@ -521,6 +518,43 @@
   white-space: nowrap;
 }
 
+/* White Reframed Thought Card */
+.modul7-reframed-card-white {
+  width: 100%;
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border, rgba(20, 60, 63, 0.12));
+  border-radius: 12px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 6px rgba(20, 60, 63, 0.04);
+}
+
+.modul7-reframed-card-label {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-primary, #243238);
+  letter-spacing: -0.4437px;
+  margin: 0;
+  text-align: center;
+}
+
+.modul7-reframed-card-text {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary, #243238);
+  letter-spacing: -0.4437px;
+  line-height: 1.45;
+  margin: 0;
+  text-align: center;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    PAGE 6: TEKNIK MERESPONS KRITIK (Figma Node 334:1838)
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -731,6 +765,95 @@
   box-shadow: 0px 2px 0px 0px rgba(255, 255, 255, 0.18) !important;
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   COMPLETED LESSON GAIN XP SCREEN
+   ═══════════════════════════════════════════════════════════════════════════ */
+.lesson-completed-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #FAF8F3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
 
+.lesson-completed-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+}
 
+.lesson-gain-xp-video-wrapper {
+  width: 220px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 
+.lesson-gain-xp-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.lesson-completed-xp-badge-wrapper {
+  animation: badgePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes badgePop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.lesson-completed-xp-badge {
+  position: relative;
+  background: rgba(255, 157, 0, 0.19);
+  border-radius: 34px;
+  padding: 8px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lesson-completed-xp-amount {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: #955C00;
+  letter-spacing: -0.6px;
+  margin: 0;
+}
+
+.btn-lesson-finish {
+  width: 100%;
+  max-width: 358px;
+  height: 46px;
+  background-color: var(--color-primary, #24A981);
+  border: 1px solid var(--color-primary-dark, #17674F);
+  border-radius: 34px;
+  box-shadow: 0px 4px 0px 0px var(--color-primary-dark, #17674F);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFFFFF;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-lesson-finish:active {
+  transform: translateY(2px);
+  box-shadow: 0px 2px 0px 0px var(--color-primary-dark, #17674F);
+}
