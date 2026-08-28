@@ -26,6 +26,7 @@ import iconBook from "../assets/pages_assets/home/icons/Book-Outline.svg";
 // Bottom nav icons
 import iconNavHome from "../assets/pages_assets/bottom-nav-icons/Home.svg";
 import iconNavMic from "../assets/pages_assets/bottom-nav-icons/Mic.svg";
+import iconNavGroup from "../assets/pages_assets/bottom-nav-icons/Group.svg";
 import iconNavUser from "../assets/pages_assets/bottom-nav-icons/User.svg";
 
 // ─── Inline icon for progress (no asset provided) ────────────────────────────
@@ -64,7 +65,13 @@ const MODULE_COLORS = [
   "#F0FBF8", "#FFF0F5", "#F0FFF4", "#FFF5EE",
 ];
 
-export default function HomeScreen({ userName, onSelectModule, onNavigatePractice }) {
+export default function HomeScreen({
+  userName,
+  onSelectModule,
+  onNavigatePractice,
+  onNavigateGroup,
+  onNavigateProfile,
+}) {
   const displayName = userName?.trim() || "Nadine Euvania";
   const [activeTab, setActiveTab] = useState("home");
 
@@ -85,53 +92,52 @@ export default function HomeScreen({ userName, onSelectModule, onNavigatePractic
         </div>
       </div>
 
-      {/* ── Scrollable Content ──────────────────────────────────── */}
+      {/* ── Scrollable Body ─────────────────────────────────────── */}
       <div className="home-scroll-body">
-        <div className="home-hero-section" data-node-id="75:939">
+        <div className="home-content">
+          
+          {/* ── Streak Section ────────────────────────────────── */}
+          <div className="home-streak-section" data-node-id="31:332">
+            <p className="home-streak-title" data-node-id="31:333">4 Hari Streak!</p>
+            <p className="home-streak-subtitle" data-node-id="31:334">
+              Latihan tiap hari biar kemampuan bicaramu makin terasah.
+            </p>
 
-          {/* ── Streak Card ──────────────────────────────────────── */}
-          <div className="home-streak-card" data-node-id="68:603">
-            <div className="home-streak-badge" data-node-id="127:267">
-              <span className="home-streak-fire-emoji">🔥</span>
-              <span className="home-streak-label">12 Hari streak</span>
-            </div>
-            <div className="home-streak-days" data-node-id="127:266">
+            <div className="home-streak-days-list" data-node-id="31:335">
               {STREAK_DAYS.map((day) => (
-                <div
-                  key={day.label}
-                  className={`home-streak-day ${day.active ? "home-streak-day--active" : ""} ${day.today ? "home-streak-day--today" : ""}`}
-                >
-                  <div className="home-streak-day-icon">
-                    {day.today ? (
-                      <img src={fireTodayGif} alt="" className="home-streak-fire-img" />
-                    ) : day.active ? (
-                      <img src={fireActiveImg} alt="" className="home-streak-fire-img" />
-                    ) : (
-                      <img src={circleInactiveImg} alt="" className="home-streak-fire-img" />
+                <div key={day.id} className="home-streak-day-col" data-node-id={day.nodeId}>
+                  <div className="home-streak-icon-wrap" data-node-id={day.circleNodeId}>
+                    {day.status === "past" && (
+                      <img src={fireActiveImg} alt="Active Streak" className="home-streak-fire-img" />
+                    )}
+                    {day.status === "today" && (
+                      <img src={fireTodayGif} alt="Today Streak" className="home-streak-fire-gif" />
+                    )}
+                    {day.status === "inactive" && (
+                      <img src={circleInactiveImg} alt="Inactive" className="home-streak-circle-img" />
                     )}
                   </div>
-                  <span className="home-streak-day-label">{day.label}</span>
+                  <span className={`home-streak-day-label ${day.status !== "inactive" ? "active" : ""}`}>
+                    {day.label}
+                  </span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* ── Today's Lesson Section (Starts Module 7) ── */}
-          <div className="home-todays-lesson-section" data-node-id="136:1421">
+          {/* ── Today's Lesson Section ────────────────────────── */}
+          <div className="home-todays-lesson-section" data-node-id="136:1385">
             <div
               className="home-todays-lesson-card"
               onClick={() => handleModuleClick(MODULES.find((m) => m.id === 7) || MODULES[6])}
               data-node-id="136:1386"
               style={{ cursor: "pointer" }}
             >
-              {/* Full Card Background Decor */}
-              <div className="home-lesson-card-bg-decor" aria-hidden="true">
-                <img src={cardBgDecor} alt="" className="home-lesson-card-bg-img" />
+              <div className="home-lesson-bg-decor" aria-hidden="true" data-node-id="136:1387">
+                <img src={cardBgDecor} alt="" className="home-lesson-bg-decor-img" />
               </div>
-
-              {/* Content row */}
-              <div className="home-lesson-card-content" data-node-id="136:1399">
-                <div className="home-lesson-text" data-node-id="136:1389">
+              <div className="home-lesson-content" data-node-id="136:1388">
+                <div className="home-lesson-text-block">
                   <p className="home-lesson-subtitle">Pelajaran Hari ini</p>
                   <p className="home-lesson-title">Hadapi Pertanyaan Menantang</p>
                   <p className="home-lesson-module">Modul 7 - Keahlian Tanya Jawab</p>
@@ -163,31 +169,37 @@ export default function HomeScreen({ userName, onSelectModule, onNavigatePractic
                 return (
                   <div
                     key={mod.id}
-                    className={`home-module-item ${mod.active || mod.highlight ? "home-module-item--active home-module-item--highlight" : ""} ${mod.inactive ? "home-module-item--inactive" : ""} ${isAvailable ? "home-module-item--available" : "home-module-item--disabled"}`}
-                    style={{ "--module-color": mod.inactive ? "#F3F4F6" : mod.active ? "rgba(232, 117, 61, 0.08)" : MODULE_COLORS[i] }}
+                    className={`home-module-card ${mod.active ? "home-module-card--active" : ""} ${mod.inactive ? "home-module-card--inactive" : ""} ${isAvailable ? "home-module-card--available" : ""}`}
                     onClick={() => handleModuleClick(mod)}
+                    style={{ cursor: isAvailable ? "pointer" : "default" }}
                     data-node-id={`module-${mod.id}`}
                   >
-                    <div className="home-module-content">
-                      <div className="home-module-text">
-                        <span className="home-module-label">{mod.module}</span>
-                        <span className="home-module-title">{mod.title}</span>
-                        {mod.tag && (
+                    {/* Left content: Tag, title, lessons count, progress */}
+                    <div className="home-module-info">
+                      {mod.tag && (
+                        <div className="home-module-tag-wrapper">
                           <span className="home-module-tag">{mod.tag}</span>
-                        )}
-                      </div>
-                      <div className="home-module-meta">
-                        <div className="home-module-meta-item">
-                          <img src={iconBook} alt="" className="home-module-meta-icon" />
+                        </div>
+                      )}
+                      <h4 className="home-module-title">{mod.module} - {mod.title}</h4>
+                      
+                      <div className="home-module-meta-row">
+                        <div className="home-module-lessons-count">
+                          <img src={iconBook} alt="" className="home-module-book-icon" />
                           <span>{mod.lessons} Pelajaran</span>
                         </div>
-                        <div className="home-module-meta-item">
+                        <div className="home-module-progress-chip">
                           <IconProgress />
-                          <span>{mod.progress} Selesai</span>
+                          <span>{mod.progress}</span>
                         </div>
                       </div>
                     </div>
-                    <div className="home-module-illus">
+
+                    {/* Right illustration */}
+                    <div
+                      className={`home-module-illus ${mod.active ? "home-module-illus--active" : ""}`}
+                      style={{ backgroundColor: MODULE_COLORS[i % MODULE_COLORS.length] }}
+                    >
                       <img
                         src={mod.image}
                         alt={mod.title}
@@ -226,8 +238,22 @@ export default function HomeScreen({ userName, onSelectModule, onNavigatePractic
         </button>
         <button
           type="button"
+          className={`home-nav-item ${activeTab === "group" ? "home-nav-item--active" : ""}`}
+          onClick={() => {
+            setActiveTab("group");
+            onNavigateGroup?.();
+          }}
+          aria-label="Community"
+        >
+          <img src={iconNavGroup} alt="Community" className={`home-nav-icon ${activeTab === "group" ? "home-nav-icon--active" : ""}`} />
+        </button>
+        <button
+          type="button"
           className={`home-nav-item ${activeTab === "user" ? "home-nav-item--active" : ""}`}
-          onClick={() => setActiveTab("user")}
+          onClick={() => {
+            setActiveTab("user");
+            onNavigateProfile?.();
+          }}
           aria-label="Profile"
         >
           <img src={iconNavUser} alt="Profile" className={`home-nav-icon ${activeTab === "user" ? "home-nav-icon--active" : ""}`} />

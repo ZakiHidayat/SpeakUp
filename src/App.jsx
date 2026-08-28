@@ -56,6 +56,8 @@ function App() {
     setCurrentScreen("welcoming");
   };
 
+  const [practiceMode, setPracticeMode] = useState("solo");
+
   const handleStartApp = () => {
     setCurrentScreen("home");
   };
@@ -88,6 +90,17 @@ function App() {
   };
 
   const handleLeaveLiveRoom = () => {
+    setPracticeMode("live");
+    setCurrentScreen("practice");
+  };
+
+  const handleNavigatePractice = () => {
+    setPracticeMode("solo");
+    setCurrentScreen("practice");
+  };
+
+  const handleNavigateGroup = () => {
+    setPracticeMode("live");
     setCurrentScreen("practice");
   };
 
@@ -116,11 +129,7 @@ function App() {
       )}
 
       {currentScreen === "register" && (
-        <RegisterForm
-          onComplete={handleRegisterComplete}
-          onLogin={() => alert("Menuju halaman Login")}
-          onBackToAnalysis={() => setCurrentScreen("analysis")}
-        />
+        <RegisterForm onRegisterComplete={handleRegisterComplete} />
       )}
 
       {currentScreen === "welcoming" && (
@@ -134,13 +143,16 @@ function App() {
         <HomeScreen
           userName={userProfile.name}
           onSelectModule={handleSelectModule}
-          onNavigatePractice={() => setCurrentScreen("practice")}
+          onNavigatePractice={handleNavigatePractice}
+          onNavigateGroup={handleNavigateGroup}
           onNavigateProfile={() => alert("Halaman Profil Segera Hadir!")}
         />
       )}
 
       {currentScreen === "practice" && (
         <PracticeZone
+          key={practiceMode}
+          initialMode={practiceMode}
           onNavigateHome={() => setCurrentScreen("home")}
           onNavigateProfile={() => alert("Halaman Profil Segera Hadir!")}
           onJoinLiveRoom={handleJoinLiveRoom}

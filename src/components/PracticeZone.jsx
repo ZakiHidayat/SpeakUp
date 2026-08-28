@@ -18,6 +18,7 @@ import iconTime from "../assets/pages_assets/practice/icon_time.svg";
 // ─── Bottom Nav Icons ────────────────────────────────────────────────────────
 import iconNavHome from "../assets/pages_assets/bottom-nav-icons/Home.svg";
 import iconNavMic from "../assets/pages_assets/bottom-nav-icons/Mic.svg";
+import iconNavGroup from "../assets/pages_assets/bottom-nav-icons/Group.svg";
 import iconNavUser from "../assets/pages_assets/bottom-nav-icons/User.svg";
 
 // ─── Live Data ───────────────────────────────────────────────────────────────
@@ -78,8 +79,13 @@ const UPCOMING_LIVE_ROOMS = [
   },
 ];
 
-export default function PracticeZone({ onNavigateHome, onNavigateProfile, onJoinLiveRoom }) {
-  const [practiceMode, setPracticeMode] = useState("solo"); // "solo" | "live"
+export default function PracticeZone({
+  initialMode = "solo",
+  onNavigateHome,
+  onNavigateProfile,
+  onJoinLiveRoom,
+}) {
+  const [practiceMode, setPracticeMode] = useState(initialMode); // "solo" | "live"
   const [selectedCard, setSelectedCard] = useState(null); // "rapid" | "filler" | "pace" | "qa" | "freetalk"
   const [activeLiveRooms, setActiveLiveRooms] = useState(ACTIVE_LIVE_ROOMS);
   const [remindedRooms, setRemindedRooms] = useState({});
@@ -595,11 +601,20 @@ export default function PracticeZone({ onNavigateHome, onNavigateProfile, onJoin
         </button>
         <button
           type="button"
-          className="home-nav-item home-nav-item--active"
+          className={`home-nav-item ${practiceMode === "solo" ? "home-nav-item--active" : ""}`}
+          onClick={() => setPracticeMode("solo")}
           aria-label="Practice"
           data-node-id="149:1524"
         >
-          <img src={iconNavMic} alt="Practice" className="home-nav-icon home-nav-icon--active" />
+          <img src={iconNavMic} alt="Practice" className={`home-nav-icon ${practiceMode === "solo" ? "home-nav-icon--active" : ""}`} />
+        </button>
+        <button
+          type="button"
+          className={`home-nav-item ${practiceMode === "live" ? "home-nav-item--active" : ""}`}
+          onClick={() => setPracticeMode("live")}
+          aria-label="Community"
+        >
+          <img src={iconNavGroup} alt="Community" className={`home-nav-icon ${practiceMode === "live" ? "home-nav-icon--active" : ""}`} />
         </button>
         <button
           type="button"

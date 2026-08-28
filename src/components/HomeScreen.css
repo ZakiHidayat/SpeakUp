@@ -520,10 +520,10 @@
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 42px;
   box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.12);
-  padding: 14px 32px;
+  padding: 14px 28px;
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 26px;
   z-index: 40;
 }
 
