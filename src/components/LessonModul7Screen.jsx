@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./LessonModul7Screen.css";
 
 // ─── Assets for Modul 7 Lesson 6 ─────────────────────────────────────────────
@@ -12,25 +12,25 @@ import videoHappySpeaker from "../assets/pages_assets/lessons/lesson-6-modul7/Vi
 import videoGainXP from "../assets/pages_assets/gain_xp/Video-Gain-XP.webm";
 
 // ─── Back Arrow Icon ─────────────────────────────────────────────────────────
-const IconArrowLeft = () => (
+const IconArrowLeft = ({ color = "#243238" }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="#243238" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 
 // ─── TopBar with progress bar ─────────────────────────────────────────────────
-function LessonTopBar({ currentStep, totalSteps, onBack }) {
+function LessonTopBar({ currentStep, totalSteps, onBack, isDark = false }) {
   const progress = (currentStep / totalSteps) * 100;
   return (
-    <div className="modul7-lesson-topbar" data-node-id="329:1660">
+    <div className={`modul7-lesson-topbar ${isDark ? "modul7-topbar--dark" : ""}`} data-node-id="329:1660">
       <button
         type="button"
-        className="modul7-lesson-back-btn"
+        className={`modul7-lesson-back-btn ${isDark ? "modul7-back-btn--dark" : ""}`}
         onClick={onBack}
         aria-label="Kembali"
         data-node-id="339:2630"
       >
-        <IconArrowLeft />
+        <IconArrowLeft color={isDark ? "#FFFFFF" : "#243238"} />
       </button>
       <div className="modul7-lesson-progress-bar" data-node-id="329:1665">
         <div className="modul7-lesson-progress-track" data-node-id="329:1666">
@@ -49,7 +49,7 @@ function LessonTopBar({ currentStep, totalSteps, onBack }) {
 function LessonPage1({ onNext, onBack }) {
   return (
     <div className="modul7-lesson-page" data-node-id="329:1659" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={1} totalSteps={6} onBack={onBack} />
+      <LessonTopBar currentStep={1} totalSteps={7} onBack={onBack} />
 
       <div className="modul7-lesson-content" data-node-id="329:1669">
         <h2 className="modul7-lesson-heading" data-node-id="329:1670">
@@ -71,43 +71,42 @@ function LessonPage1({ onNext, onBack }) {
             </p>
           </div>
 
-          {/* Card 2: Jawaban belibet */}
-          <div className="modul7-feeling-card" data-node-id="329:1687">
-            <div className="modul7-card-img-container" data-node-id="329:1688">
+          {/* Card 2: Panik */}
+          <div className="modul7-feeling-card" data-node-id="329:1689">
+            <div className="modul7-card-img-container" data-node-id="329:1690">
               <img
                 src={imgPanik}
-                alt="Jawaban jadi belibet karena keburu panik"
+                alt="Panik karena mikir harus jawab sempurna sekarang juga"
                 className="modul7-card-img"
               />
             </div>
-            <p className="modul7-card-text" data-node-id="329:1689">
-              Jawaban jadi belibet karena keburu panik?
+            <p className="modul7-card-text" data-node-id="329:1691">
+              Panik karena mikir harus jawab sempurna sekarang juga?
             </p>
           </div>
 
-          {/* Card 3: Takut nggak kompeten */}
-          <div className="modul7-feeling-card" data-node-id="329:1690">
-            <div className="modul7-card-img-container" data-node-id="329:1691">
+          {/* Card 3: Gak kompeten */}
+          <div className="modul7-feeling-card" data-node-id="329:1694">
+            <div className="modul7-card-img-container" data-node-id="329:1695">
               <img
                 src={imgGakKompeten}
-                alt="Takut kelihatan nggak kompeten di depan orang lain"
+                alt="Takut kelihatan nggak kompeten di depan audiens"
                 className="modul7-card-img"
               />
             </div>
-            <p className="modul7-card-text" data-node-id="329:1692">
-              Takut kelihatan nggak kompeten di depan orang lain?
+            <p className="modul7-card-text" data-node-id="329:1696">
+              Takut kelihatan nggak kompeten di depan audiens?
             </p>
           </div>
         </div>
       </div>
 
-      {/* Fixed bottom CTA Button */}
-      <div className="modul7-lesson-cta-wrapper">
+      <div className="modul7-lesson-cta-wrapper" data-node-id="329:1671">
         <button
           type="button"
           className="btn-modul7-next"
           onClick={onNext}
-          data-node-id="329:1680"
+          data-node-id="329:1672"
         >
           Lanjut
         </button>
@@ -120,17 +119,17 @@ function LessonPage1({ onNext, onBack }) {
 function LessonPage2({ onNext, onBack }) {
   return (
     <div className="modul7-lesson-page modul7-lesson-page-2" data-node-id="329:1710" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={2} totalSteps={6} onBack={onBack} />
+      <LessonTopBar currentStep={2} totalSteps={7} onBack={onBack} />
 
       {/* Center Quotes Area */}
       <div className="modul7-page2-content" data-node-id="329:1719">
         <p className="modul7-page2-quote text-quotes" data-node-id="329:1720">
-          ”Menghadapi pertanyaan sulit bukan berarti kita harus jadi kamus berjalan. Tantangan sebenarnya adalah bagaimana kita tetap tenang saat otak dipaksa berpikir cepat di hadapan orang lain.”
+          ”Pertanyaan menantang bukan serangan. Itu tanda audiens peduli dan pengin denger sudut pandangmu.”
         </p>
       </div>
 
       {/* Bottom Mascot Illustration */}
-      <div className="modul7-page2-mascot-wrapper" data-node-id="331:1763">
+      <div className="modul7-page2-mascot-wrapper" data-node-id="329:1721">
         <img
           src={imgMascottQuotes}
           alt="Mascot Quotes"
@@ -138,14 +137,14 @@ function LessonPage2({ onNext, onBack }) {
         />
       </div>
 
-      {/* Dual Bottom Buttons (Back pill + Lanjut pill) */}
-      <div className="modul7-page2-cta-wrapper" data-node-id="338:2221">
+      {/* Dual Bottom Buttons */}
+      <div className="modul7-page2-cta-wrapper" data-node-id="338:2220">
         <button
           type="button"
           className="btn-modul7-round-back"
           onClick={onBack}
           aria-label="Kembali ke halaman sebelumnya"
-          data-node-id="338:2222"
+          data-node-id="338:2221"
         >
           <IconArrowLeft />
         </button>
@@ -153,7 +152,7 @@ function LessonPage2({ onNext, onBack }) {
           type="button"
           className="btn-modul7-next btn-modul7-next--flex"
           onClick={onNext}
-          data-node-id="338:2227"
+          data-node-id="338:2226"
         >
           Lanjut
         </button>
@@ -162,84 +161,68 @@ function LessonPage2({ onNext, onBack }) {
   );
 }
 
-// ─── Dotted Arrow Connector ──────────────────────────────────────────────────
-const DottedArrow = () => (
-  <div className="modul7-arrow-divider" aria-hidden="true" data-node-id="332:1776">
-    <svg width="12" height="34" viewBox="0 0 12 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M6 0V26"
-        stroke="#243238"
-        strokeWidth="1.5"
-        strokeDasharray="2 3"
-        strokeLinecap="round"
-      />
-      <path
-        d="M2.5 23L6 28L9.5 23"
-        stroke="#243238"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  </div>
-);
-
 // ─── Page 3: Cognitive Restructuring (Figma node 329:1733) ───────────────────
 function LessonPage3({ onNext, onBack }) {
   return (
     <div className="modul7-lesson-page" data-node-id="329:1733" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={3} totalSteps={6} onBack={onBack} />
+      <LessonTopBar currentStep={3} totalSteps={7} onBack={onBack} />
 
       <div className="modul7-lesson-content modul7-page3-content" data-node-id="329:1742">
         {/* Title Header */}
-        <div className="modul7-page3-header" data-node-id="334:1833">
-          <p className="modul7-page3-subtitle" data-node-id="334:1831">
-            Cognitive Restructuring
+        <div className="modul7-page3-header" data-node-id="329:1743">
+          <p className="modul7-page3-subtitle" data-node-id="329:1744">
+            Uji Fakta (Cognitive Restructuring)
           </p>
-          <h2 className="modul7-page3-title" data-node-id="329:1746">
-            Pikiran itu belum<br />tentu fakta
+          <h2 className="modul7-page3-title" data-node-id="329:1745">
+            Pikiranmu suka melebih-lebihkan
           </h2>
         </div>
 
-        {/* Cognitive Comparison Cards */}
-        <div className="modul7-page3-cards-container" data-node-id="332:1780">
-          {/* Dark Thought Card */}
-          <div className="modul7-thought-card-dark" data-node-id="329:1748">
-            <div className="modul7-brain-img-wrap" data-node-id="332:1774">
-              <img
-                src={imgBrain}
-                alt="Brain"
-                className="modul7-brain-img"
-              />
+        {/* Thought & Fact Flow Cards */}
+        <div className="modul7-page3-flow" data-node-id="329:1747">
+          {/* Card 1: Dark thought card */}
+          <div className="modul7-thought-card" data-node-id="329:1748">
+            <div className="modul7-brain-img-wrapper" data-node-id="329:1749">
+              <img src={imgBrain} alt="Brain" className="modul7-brain-img" />
             </div>
-            <p className="modul7-thought-text-dark" data-node-id="329:1754">
-              “Mereka pasti menilaiku buruk karena aku nggak bisa langsung menjawab pertanyaan ini.”
-            </p>
+            <div className="modul7-thought-text-wrapper" data-node-id="329:1751">
+              <p className="modul7-thought-label" data-node-id="329:1752">
+                Pikiran otomatis:
+              </p>
+              <p className="modul7-thought-content" data-node-id="329:1753">
+                ”Gue harus tahu semua jawaban. Kalau nggak bisa, gue gagal total.”
+              </p>
+            </div>
           </div>
 
-          {/* Dotted Arrow Connector */}
-          <DottedArrow />
+          {/* Dotted Arrow Down */}
+          <div className="modul7-dotted-arrow-wrapper" data-node-id="333:1783">
+            <svg width="24" height="48" viewBox="0 0 24 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0V40" stroke="#243238" strokeWidth="2.5" strokeDasharray="4 4" strokeLinecap="round"/>
+              <path d="M6 34L12 42L18 34" stroke="#243238" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
 
-          {/* Fact Card */}
-          <div className="modul7-fact-card-white" data-node-id="329:1756">
-            <h3 className="modul7-fact-card-label" data-node-id="332:1782">
-              Fakta Sebenarnya
-            </h3>
-            <p className="modul7-fact-card-text" data-node-id="329:1757">
-              “Orang lain paham ini pertanyaan sulit. Yang paling penting bukan kecepatan menjawab, tapi kemampuanku untuk tetap tenang dan fokus memprosesnya.”
+          {/* Card 2: White fact card */}
+          <div className="modul7-fact-card" data-node-id="329:1754">
+            <p className="modul7-fact-label" data-node-id="329:1755">
+              Faktanya:
+            </p>
+            <p className="modul7-fact-content" data-node-id="329:1756">
+              Audiens menghargai kejujuran. Nggak tahu bukan berarti nggak kompeten — itu kesempatan buat eksplorasi bareng.
             </p>
           </div>
         </div>
       </div>
 
       {/* Dual Bottom Buttons */}
-      <div className="modul7-page2-cta-wrapper" data-node-id="338:2185">
+      <div className="modul7-page2-cta-wrapper" data-node-id="338:2229">
         <button
           type="button"
           className="btn-modul7-round-back"
           onClick={onBack}
           aria-label="Kembali ke halaman sebelumnya"
-          data-node-id="338:2186"
+          data-node-id="338:2230"
         >
           <IconArrowLeft />
         </button>
@@ -247,7 +230,7 @@ function LessonPage3({ onNext, onBack }) {
           type="button"
           className="btn-modul7-next btn-modul7-next--flex"
           onClick={onNext}
-          data-node-id="338:2191"
+          data-node-id="338:2235"
         >
           Lanjut
         </button>
@@ -256,79 +239,65 @@ function LessonPage3({ onNext, onBack }) {
   );
 }
 
-// ─── Short Dotted Arrow Connector ───────────────────────────────────────────
-const DottedArrowShort = () => (
-  <div className="modul7-arrow-divider-short" aria-hidden="true">
-    <svg width="12" height="23" viewBox="0 0 12 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M6 0V15"
-        stroke="#243238"
-        strokeWidth="1.5"
-        strokeDasharray="2 3"
-        strokeLinecap="round"
-      />
-      <path
-        d="M2.5 12L6 17L9.5 12"
-        stroke="#243238"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  </div>
-);
-
-// ─── Page 4: Cognitive Defusion (Figma node 333:1784) ────────────────────────
+// ─── Page 4: Cognitive Defusion (Figma node 333:1784) ─────────────────────────
 function LessonPage4({ onNext, onBack }) {
   return (
     <div className="modul7-lesson-page" data-node-id="333:1784" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={4} totalSteps={6} onBack={onBack} />
+      <LessonTopBar currentStep={4} totalSteps={7} onBack={onBack} />
 
-      <div className="modul7-lesson-content modul7-page4-content" data-node-id="333:1793">
-        {/* Title Header */}
-        <div className="modul7-page4-header" data-node-id="334:1834">
-          <p className="modul7-page4-subtitle" data-node-id="334:1835">
-            Cognitive Defusion
+      <div className="modul7-lesson-content modul7-page4-content" data-node-id="333:1786">
+        {/* Header */}
+        <div className="modul7-page4-header" data-node-id="333:1787">
+          <p className="modul7-page4-subtitle" data-node-id="333:1788">
+            Beri Jarak (Cognitive Defusion)
           </p>
-          <h2 className="modul7-page4-title" data-node-id="334:1836">
-            Kamu nggak harus<br />percaya tiap pikiran
+          <h2 className="modul7-page4-title" data-node-id="333:1789">
+            Kamu bukan pikiranmu
           </h2>
         </div>
 
-        {/* Defusion Flow Container */}
-        <div className="modul7-page4-cards-container" data-node-id="333:1795">
-          {/* Dark Catastrophizing Thought Card */}
-          <div className="modul7-thought-card-dark" data-node-id="333:1796">
-            <div className="modul7-brain-img-wrap" data-node-id="333:1797">
+        {/* 3 Step Flow */}
+        <div className="modul7-page4-flow" data-node-id="333:1791">
+          {/* 1. Dark Thought Card */}
+          <div className="modul7-defusion-thought-card" data-node-id="333:1792">
+            <div className="modul7-mascot-senyum-wrapper" data-node-id="333:1793">
               <img
-                src={imgBrain}
-                alt="Brain"
-                className="modul7-brain-img"
+                src={imgMascottSenyum}
+                alt="Mascot Senyum Jahat"
+                className="modul7-mascot-senyum-img"
               />
             </div>
-            <p className="modul7-thought-text-dark" data-node-id="333:1798">
-              “Gila, aku diam kelamaan pas ditanya. Habis sudah reputasiku, presentasiku pasti dianggap gagal total.”
+            <p className="modul7-defusion-thought-text" data-node-id="333:1795">
+              ”Pertanyaan ini jebakan. Dia pengin bikin gue malu.”
             </p>
           </div>
 
-          {/* Arrow 1 */}
-          <DottedArrowShort />
+          {/* Dotted Arrow 1 */}
+          <div className="modul7-short-dotted-arrow">
+            <svg width="24" height="28" viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0V20" stroke="#243238" strokeWidth="2.5" strokeDasharray="3 3" strokeLinecap="round"/>
+              <path d="M7 16L12 22L17 16" stroke="#243238" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
 
-          {/* Center Action Tag */}
-          <p className="modul7-breath-tag" data-node-id="334:1811">
-            Ambil napas 🧘
-          </p>
+          {/* 2. Center Pill: Ambil napas */}
+          <div className="modul7-breath-pill" data-node-id="333:1797">
+            <span>Ambil napas</span>
+            <span className="modul7-breath-emoji">🧘</span>
+          </div>
 
-          {/* Arrow 2 */}
-          <DottedArrowShort />
+          {/* Dotted Arrow 2 */}
+          <div className="modul7-short-dotted-arrow">
+            <svg width="24" height="28" viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0V20" stroke="#243238" strokeWidth="2.5" strokeDasharray="3 3" strokeLinecap="round"/>
+              <path d="M7 16L12 22L17 16" stroke="#243238" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
 
-          {/* White Reframed Card */}
-          <div className="modul7-fact-card-white" data-node-id="333:1802">
-            <h3 className="modul7-fact-card-label" data-node-id="333:1803">
-              Ubah menjadi...
-            </h3>
-            <p className="modul7-fact-card-text" data-node-id="333:1804">
-              ”Aku sedang mengamati pikiranku yang lagi muterin skenario 'reputasiku hancur' hanya karena aku butuh waktu 5 detik untuk mikir.”
+          {/* 3. White Reframed Thought Card */}
+          <div className="modul7-reframed-card" data-node-id="333:1799">
+            <p className="modul7-reframed-text" data-node-id="333:1800">
+              ”Aku lagi ngerasa terancam, padahal ini cuma pertanyaan biasa.”
             </p>
           </div>
         </div>
@@ -362,7 +331,7 @@ function LessonPage4({ onNext, onBack }) {
 function LessonPage5({ onNext, onBack }) {
   return (
     <div className="modul7-lesson-page modul7-lesson-page-2" data-node-id="334:1816" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={5} totalSteps={6} onBack={onBack} />
+      <LessonTopBar currentStep={5} totalSteps={7} onBack={onBack} />
 
       {/* Center Quotes Area */}
       <div className="modul7-page2-content" data-node-id="334:1825">
@@ -408,7 +377,7 @@ function LessonPage5({ onNext, onBack }) {
 function LessonPage6({ onNext, onBack }) {
   return (
     <div className="modul7-lesson-page" data-node-id="334:1838" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={6} totalSteps={6} onBack={onBack} />
+      <LessonTopBar currentStep={6} totalSteps={7} onBack={onBack} />
 
       <div className="modul7-lesson-content modul7-page6-content" data-node-id="334:1847">
         {/* Title Header */}
@@ -449,22 +418,22 @@ function LessonPage6({ onNext, onBack }) {
                 Cari Titik Temu 🔎
               </p>
               <p className="modul7-formula-card-desc" data-node-id="334:1887">
-                "Ada bagian yang emang bisa aku perjelas lebih lanjut."
+                "Poin kamu tentang [X] ada benernya..."
               </p>
             </div>
           </div>
 
           {/* Card 3 */}
           <div className="modul7-formula-card" data-node-id="334:1870">
-            <div className="modul7-formula-num-badge" data-node-id="334:1879">
+            <div className="modul7-formula-num-badge" data-node-id="334:1878">
               3
             </div>
             <div className="modul7-formula-text-wrap" data-node-id="334:1889">
               <p className="modul7-formula-card-title" data-node-id="334:1890">
-                Sikap/Batas 🧭
+                Sikap / Batas 🧭
               </p>
               <p className="modul7-formula-card-desc" data-node-id="334:1891">
-                "Tapi dari data yang aku punya, kesimpulannya tetap seperti ini."
+                "...tapi dari data yang kita punya, pendekatan [Y] tetap yang paling efektif."
               </p>
             </div>
           </div>
@@ -489,6 +458,71 @@ function LessonPage6({ onNext, onBack }) {
           data-node-id="338:2119"
         >
           Ayo Latihan
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Page 7: Skenario Latihan (Figma node 338:1896) ───────────────────────────
+const SCENARIO_STEPS = [
+  { id: 1, num: 1, text: "Mendapatkan tema secara acak" },
+  { id: 2, num: 2, text: "Siapkan 3 poin untuk argumenmu" },
+  { id: 3, num: 3, text: "Mini-presentation" },
+  { id: 4, num: 4, text: "Transisi Q&A" },
+  { id: 5, num: 5, text: "Pertanyaan menantang" },
+  { id: 6, num: 7, text: "Feedback" },
+];
+
+function LessonPage7({ onNext, onBack }) {
+  return (
+    <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="338:1896" data-name="Lesson-Hadapi Pertanyaan Menantang">
+      <LessonTopBar currentStep={7} totalSteps={7} onBack={onBack} isDark={true} />
+
+      <div className="modul7-lesson-content modul7-page7-content" data-node-id="338:1905">
+        {/* Header */}
+        <div className="modul7-page7-header" data-node-id="338:1996">
+          <p className="modul7-page7-subtitle" data-node-id="338:1997">
+            Skenario Latihan
+          </p>
+          <h2 className="modul7-page7-title" data-node-id="338:1998">
+            Hadapi Pertanyaan Menantang
+          </h2>
+        </div>
+
+        {/* 6 Flow Steps Cards */}
+        <div className="modul7-page7-cards-wrapper" data-node-id="338:1999">
+          {SCENARIO_STEPS.map((item) => (
+            <div key={item.id} className="modul7-scenario-card" data-node-id={`scenario-card-${item.id}`}>
+              <div className="modul7-scenario-badge" data-node-id={`scenario-badge-${item.id}`}>
+                {item.num}
+              </div>
+              <p className="modul7-scenario-text" data-node-id={`scenario-text-${item.id}`}>
+                {item.text}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Dual Bottom Buttons */}
+      <div className="modul7-page2-cta-wrapper" data-node-id="338:2203">
+        <button
+          type="button"
+          className="btn-modul7-round-back btn-modul7-round-back--dark"
+          onClick={onBack}
+          aria-label="Kembali ke halaman sebelumnya"
+          data-node-id="338:2204"
+        >
+          <IconArrowLeft color="#FFFFFF" />
+        </button>
+        <button
+          type="button"
+          className="btn-modul7-next btn-modul7-next--flex"
+          onClick={onNext}
+          data-node-id="338:2209"
+        >
+          Aku Siap!
         </button>
       </div>
     </div>
@@ -585,7 +619,8 @@ export default function LessonModul7Screen({ onBack, onFinish }) {
       if (prev === 3) return 4;
       if (prev === 4) return 5;
       if (prev === 5) return 6;
-      if (prev === 6) return "completed";
+      if (prev === 6) return 7;
+      if (prev === 7) return "completed";
       return "completed";
     });
   };
@@ -601,7 +636,8 @@ export default function LessonModul7Screen({ onBack, onFinish }) {
       if (prev === 4) return 3;
       if (prev === 5) return 4;
       if (prev === 6) return 5;
-      if (prev === "completed") return 6;
+      if (prev === 7) return 6;
+      if (prev === "completed") return 7;
       return prev - 1;
     });
   };
@@ -614,6 +650,7 @@ export default function LessonModul7Screen({ onBack, onFinish }) {
       {step === 4 && <LessonPage4 onNext={goNext} onBack={goPrev} />}
       {step === 5 && <LessonPage5 onNext={goNext} onBack={goPrev} />}
       {step === 6 && <LessonPage6 onNext={goNext} onBack={goPrev} />}
+      {step === 7 && <LessonPage7 onNext={goNext} onBack={goPrev} />}
       {step === "completed" && <CompletedLesson onFinish={onFinish} />}
     </div>
   );
