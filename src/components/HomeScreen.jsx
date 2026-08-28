@@ -56,8 +56,8 @@ const MODULES = [
   { id: 4, module: "Modul 4", title: "Percaya Diri di Depan Kamera", lessons: 6, progress: "1/6 Selesai", image: imgModul4, active: false, highlight: false, tag: null },
   { id: 5, module: "Modul 5", title: "Bicara dengan Wibawa", lessons: 6, progress: "1/6 Selesai", image: imgModul5, active: false, highlight: false, tag: null },
   { id: 6, module: "Modul 6", title: "Kuasai Panggung", lessons: 5, progress: "1/5 Selesai", image: imgModul6, active: false, highlight: false, tag: null },
-  { id: 7, module: "Modul 7", title: "Keahlian Tanya Jawab", lessons: 6, progress: "1/6 Selesai", image: imgModul7, active: true, highlight: false, tag: "Testing available" },
-  { id: 8, module: "Modul 8", title: "Berani di Dunia Nyata", lessons: 5, progress: "1/5 Selesai", image: imgModul8, active: false, highlight: true, tag: null },
+  { id: 7, module: "Modul 7", title: "Keahlian Tanya Jawab", lessons: 6, progress: "1/6 Selesai", image: imgModul7, active: true, highlight: true, tag: "Testing available" },
+  { id: 8, module: "Modul 8", title: "Berani di Dunia Nyata", lessons: 5, progress: "0/5 Selesai", image: imgModul8, active: false, highlight: false, inactive: true, tag: null },
 ];
 
 export default function HomeScreen({
@@ -138,7 +138,7 @@ export default function HomeScreen({
                 <div className="home-lesson-text" data-node-id="136:1389">
                   <p className="home-lesson-subtitle" data-node-id="136:1387">Pelajaran Hari ini</p>
                   <p className="home-lesson-title" data-node-id="136:1388">Hadapi Pertanyaan Menantang</p>
-                  <p className="home-lesson-module" data-node-id="136:1451">Modul 8 - Berani di Dunia Nyata</p>
+                  <p className="home-lesson-module" data-node-id="136:1451">Modul 7 - Keahlian Tanya Jawab</p>
                 </div>
                 <div className="home-lesson-image-wrapper" data-node-id="136:1390">
                   <img src={todaysLessonImg} alt="Hadapi Pertanyaan Menantang" className="home-lesson-image" />
@@ -167,7 +167,7 @@ export default function HomeScreen({
                 return (
                   <div
                     key={mod.id}
-                    className={`home-module-item ${mod.highlight ? "home-module-item--highlight" : ""} ${isAvailable ? "home-module-item--available" : ""}`}
+                    className={`home-module-item ${mod.highlight ? "home-module-item--highlight" : ""} ${mod.inactive ? "home-module-item--inactive" : ""} ${isAvailable ? "home-module-item--available" : "home-module-item--disabled"}`}
                     onClick={() => handleModuleClick(mod)}
                     style={{ cursor: isAvailable ? "pointer" : "default" }}
                     data-node-id={`module-${mod.id}`}

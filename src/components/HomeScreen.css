@@ -399,11 +399,47 @@
   box-shadow: 0px 1px 0px 0px #E3E8E8;
 }
 
-/* Highlighted module (Modul 8 in Figma node 29:7) */
+/* Highlighted module (Modul 7) */
 .home-module-item--highlight {
   background: rgba(232, 117, 61, 0.1) !important;
   border-color: #E8753D !important;
   box-shadow: 0px 3px 0px 0px #E8753D !important;
+}
+
+/* Inactive / Monochrome Disabled Module (Modul 8) */
+.home-module-item--inactive {
+  background: #F8F9FA !important;
+  border-color: rgba(20, 60, 63, 0.08) !important;
+  box-shadow: 0px 3px 0px 0px #E2E8F0 !important;
+  filter: grayscale(100%);
+  opacity: 0.6;
+  cursor: default !important;
+}
+
+.home-module-item--inactive .home-module-label {
+  color: #94A3B8 !important;
+}
+
+.home-module-item--inactive .home-module-title {
+  color: #64748B !important;
+}
+
+.home-module-item--inactive .home-module-meta-item span {
+  color: #94A3B8 !important;
+}
+
+.home-module-item--inactive .home-module-illus-img {
+  filter: grayscale(100%);
+  opacity: 0.55;
+}
+
+.home-module-item--disabled {
+  cursor: default !important;
+}
+
+.home-module-item--disabled:active {
+  transform: none !important;
+  box-shadow: 0px 3px 0px 0px #E3E8E8 !important;
 }
 
 .home-module-content {
