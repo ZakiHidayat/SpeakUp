@@ -1209,6 +1209,74 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   PAGE 12: PERTANYAAN #1 PROMPT (Figma Node 339:2449)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.modul7-page12-content {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 40px 20px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.modul7-page12-counter {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.6141px;
+  text-align: center;
+  margin: 0;
+}
+
+.modul7-page12-question-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 320px;
+  margin: auto 0;
+}
+
+.modul7-page12-question-label {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-caption, #8199A3);
+  letter-spacing: -0.4437px;
+  margin: 0;
+  text-align: center;
+}
+
+.modul7-page12-question-text {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.4437px;
+  line-height: 1.45;
+  margin: 0;
+  text-align: center;
+}
+
+.modul7-page12-countdown-text {
+  font-family: var(--font-family-base, 'Space Grotesk', sans-serif);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-caption, #8199A3);
+  margin: 0 0 16px 0;
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    COMPLETED LESSON GAIN XP SCREEN
    ═══════════════════════════════════════════════════════════════════════════ */
 .lesson-completed-screen {

@@ -48,7 +48,7 @@ function LessonTopBar({ currentStep, totalSteps, onBack, isDark = false }) {
 function LessonPage1({ onNext, onBack }) {
   return (
     <div className="modul7-lesson-page" data-node-id="329:1659" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={1} totalSteps={11} onBack={onBack} />
+      <LessonTopBar currentStep={1} totalSteps={12} onBack={onBack} />
 
       <div className="modul7-lesson-content" data-node-id="329:1669">
         <h2 className="modul7-lesson-heading" data-node-id="329:1670">
@@ -118,7 +118,7 @@ function LessonPage1({ onNext, onBack }) {
 function LessonPage2({ onNext, onBack }) {
   return (
     <div className="modul7-lesson-page modul7-lesson-page-2" data-node-id="329:1710" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={2} totalSteps={11} onBack={onBack} />
+      <LessonTopBar currentStep={2} totalSteps={12} onBack={onBack} />
 
       {/* Center Quotes Area */}
       <div className="modul7-page2-content" data-node-id="329:1719">
@@ -164,7 +164,7 @@ function LessonPage2({ onNext, onBack }) {
 function LessonPage3({ onNext, onBack }) {
   return (
     <div className="modul7-lesson-page" data-node-id="329:1733" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={3} totalSteps={11} onBack={onBack} />
+      <LessonTopBar currentStep={3} totalSteps={12} onBack={onBack} />
 
       <div className="modul7-lesson-content modul7-page3-content" data-node-id="329:1742">
         {/* Title Header */}
@@ -237,7 +237,7 @@ function LessonPage3({ onNext, onBack }) {
 function LessonPage4({ onNext, onBack }) {
   return (
     <div className="modul7-lesson-page" data-node-id="333:1784" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={4} totalSteps={11} onBack={onBack} />
+      <LessonTopBar currentStep={4} totalSteps={12} onBack={onBack} />
 
       <div className="modul7-lesson-content modul7-page4-content" data-node-id="333:1786">
         {/* Header */}
@@ -327,7 +327,7 @@ function LessonPage4({ onNext, onBack }) {
 function LessonPage5({ onNext, onBack }) {
   return (
     <div className="modul7-lesson-page modul7-lesson-page-2" data-node-id="334:1816" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={5} totalSteps={11} onBack={onBack} />
+      <LessonTopBar currentStep={5} totalSteps={12} onBack={onBack} />
 
       {/* Center Quotes Area */}
       <div className="modul7-page2-content" data-node-id="334:1825">
@@ -373,7 +373,7 @@ function LessonPage5({ onNext, onBack }) {
 function LessonPage6({ onNext, onBack }) {
   return (
     <div className="modul7-lesson-page" data-node-id="334:1838" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={6} totalSteps={11} onBack={onBack} />
+      <LessonTopBar currentStep={6} totalSteps={12} onBack={onBack} />
 
       <div className="modul7-lesson-content modul7-page6-content" data-node-id="334:1847">
         {/* Title Header */}
@@ -473,7 +473,7 @@ const SCENARIO_STEPS = [
 function LessonPage7({ onNext, onBack }) {
   return (
     <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="338:1896" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={7} totalSteps={11} onBack={onBack} isDark={true} />
+      <LessonTopBar currentStep={7} totalSteps={12} onBack={onBack} isDark={true} />
 
       <div className="modul7-lesson-content modul7-page7-content" data-node-id="338:1905">
         {/* Header */}
@@ -542,7 +542,7 @@ function LessonPage8({ onNext, onBack }) {
 
   return (
     <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="338:1946" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={8} totalSteps={11} onBack={onBack} isDark={true} />
+      <LessonTopBar currentStep={8} totalSteps={12} onBack={onBack} isDark={true} />
 
       <div className="modul7-lesson-content modul7-page8-content" data-node-id="338:1947">
         {/* Main Theme Topic Wrapper */}
@@ -614,7 +614,7 @@ function LessonPage9({ onNext, onBack }) {
 
   return (
     <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="339:2254" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={9} totalSteps={11} onBack={onBack} isDark={true} />
+      <LessonTopBar currentStep={9} totalSteps={12} onBack={onBack} isDark={true} />
 
       <div className="modul7-lesson-content modul7-page9-content" data-node-id="339:2255">
         {/* Waktu Persiapan Top Banner */}
@@ -841,7 +841,7 @@ function LessonPage10({ onNext, onBack }) {
 
   return (
     <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="339:2362" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={10} totalSteps={11} onBack={handleBack} isDark={true} />
+      <LessonTopBar currentStep={10} totalSteps={12} onBack={handleBack} isDark={true} />
 
       <div className="modul7-lesson-content modul7-page10-content" data-node-id="339:2363">
         {/* Title Heading */}
@@ -888,7 +888,7 @@ function LessonPage10({ onNext, onBack }) {
 function LessonPage11({ onNext, onBack }) {
   return (
     <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="339:2395" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={11} totalSteps={11} onBack={onBack} isDark={true} />
+      <LessonTopBar currentStep={11} totalSteps={12} onBack={onBack} isDark={true} />
 
       <div className="modul7-lesson-content modul7-page11-content" data-node-id="339:2396">
         {/* Stage Hero Image */}
@@ -930,6 +930,62 @@ function LessonPage11({ onNext, onBack }) {
           data-node-id="339:2422"
         >
           Mulai Tanya Jawab
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Page 12: Pertanyaan #1 Prompt (Figma node 339:2449) ──────────────────────
+function LessonPage12({ onNext, onBack }) {
+  const [countdown, setCountdown] = useState(15);
+
+  useEffect(() => {
+    if (countdown <= 0) {
+      onNext();
+      return;
+    }
+    const timer = setInterval(() => {
+      setCountdown((prev) => prev - 1);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [countdown, onNext]);
+
+  return (
+    <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="339:2449" data-name="Lesson-Hadapi Pertanyaan Menantang">
+      <LessonTopBar currentStep={12} totalSteps={12} onBack={onBack} isDark={true} />
+
+      <div className="modul7-lesson-content modul7-page12-content" data-node-id="339:2450">
+        {/* Top Step Counter 1/2 */}
+        <p className="modul7-page12-counter" data-node-id="339:2635">
+          1/2
+        </p>
+
+        {/* Center Question Wrapper */}
+        <div className="modul7-page12-question-wrapper" data-node-id="339:2472">
+          <p className="modul7-page12-question-label" data-node-id="339:2473">
+            Pertanyaan #1
+          </p>
+          <p className="modul7-page12-question-text" data-node-id="339:2474">
+            “Kamu bilang musik membantu fokus. Bagaimana kamu membuktikan bahwa fokusmu meningkat karena musik, bukan karena kamu memang sedang mengerjakan tugas yang lebih mudah atau sedang lebih termotivasi hari itu?”
+          </p>
+        </div>
+
+        {/* Auto start countdown */}
+        <p className="modul7-page12-countdown-text" data-node-id="339:2513">
+          Mulai otomatis dalam {countdown}
+        </p>
+      </div>
+
+      {/* Single CTA Button Footer */}
+      <div className="modul7-lesson-cta-wrapper" data-node-id="339:2515">
+        <button
+          type="button"
+          className="btn-modul7-next"
+          onClick={onNext}
+          data-node-id="339:2516"
+        >
+          Mulai Jawab
         </button>
       </div>
     </div>
@@ -1031,7 +1087,8 @@ export default function LessonModul7Screen({ onBack, onFinish }) {
       if (prev === 8) return 9;
       if (prev === 9) return 10;
       if (prev === 10) return 11;
-      if (prev === 11) return "completed";
+      if (prev === 11) return 12;
+      if (prev === 12) return "completed";
       return "completed";
     });
   };
@@ -1053,7 +1110,8 @@ export default function LessonModul7Screen({ onBack, onFinish }) {
       if (prev === 9) return 8;
       if (prev === 10) return 9;
       if (prev === 11) return 10;
-      if (prev === "completed") return 11;
+      if (prev === 12) return 11;
+      if (prev === "completed") return 12;
       return prev - 1;
     });
   };
@@ -1071,6 +1129,7 @@ export default function LessonModul7Screen({ onBack, onFinish }) {
       {step === 9 && <LessonPage9 onNext={goNext} onBack={goPrev} />}
       {step === 10 && <LessonPage10 onNext={goNext} onBack={goPrev} />}
       {step === 11 && <LessonPage11 onNext={goNext} onBack={goPrev} />}
+      {step === 12 && <LessonPage12 onNext={goNext} onBack={goPrev} />}
       {step === "completed" && <CompletedLesson onFinish={onFinish} />}
     </div>
   );
