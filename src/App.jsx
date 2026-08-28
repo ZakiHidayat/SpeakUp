@@ -38,12 +38,7 @@ function App() {
   };
 
   const handleQuestionnaireFinish = (_answers) => {
-    // After all 7 steps (including video), show AI analysis
-    setCurrentScreen("analysis");
-  };
-
-  const handleAnalysisContinue = () => {
-    // After AI analysis, proceed to 3-step Register Form
+    // Questionnaire directly proceeds to Register Form
     setCurrentScreen("register");
   };
 
@@ -124,12 +119,12 @@ function App() {
         />
       )}
 
-      {currentScreen === "analysis" && (
-        <AIAnalysis onContinue={handleAnalysisContinue} />
-      )}
-
       {currentScreen === "register" && (
-        <RegisterForm onRegisterComplete={handleRegisterComplete} />
+        <RegisterForm
+          onComplete={handleRegisterComplete}
+          onLogin={() => alert("Menuju halaman Login")}
+          onBackToAnalysis={() => setCurrentScreen("questionnaires")}
+        />
       )}
 
       {currentScreen === "welcoming" && (

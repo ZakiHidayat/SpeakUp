@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import "./Questionnaires.css";
 
 // ─── Asset Imports ───────────────────────────────────────────────────────────
@@ -9,10 +9,8 @@ import q4Illustration from "../assets/pages_assets/questionnaires/q4_illustratio
 import q5Illustration from "../assets/pages_assets/questionnaires/q5_illustration.png";
 import q6Illustration from "../assets/pages_assets/questionnaires/q6_illustration.png";
 import arrowLeftIcon from "../assets/pages_assets/questionnaires/arrow_left.svg";
-import recordBtn from "../assets/pages_assets/questionnaires/record_btn.svg";
-import recordDot from "../assets/pages_assets/questionnaires/record_dot.svg";
 
-// ─── Question Dataset ─────────────────────────────────────────────────────────
+// ─── Question Dataset (6 Questionnaires) ───────────────────────────────────────
 export const DEFAULT_QUESTIONS = [
   {
     id: "q1",
@@ -107,12 +105,6 @@ export const DEFAULT_QUESTIONS = [
       { id: "buktiin", label: "Buktiin ke diri sendiri kalau aku bisa" },
     ],
   },
-  {
-    id: "q7",
-    step: 7,
-    title: "Langkah 7 dari 7",
-    type: "video_record",
-  },
 ];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -180,372 +172,65 @@ function ModernSliderInput({ question, value, onChange }) {
     ticks.push(i);
   }
 
-  // Dynamic theme color (Green for calm, Orange for intense)
-  const isHigh = current > 5;
-  const themeColor = isHigh ? "#E8753D" : "#24A981";
-
-  return (
-    <div className="modern-slider-container" data-node-id="207:3249">
-      {/* Value Indicator Badge */}
-      <div className="slider-value-display">
-        <span
-          className="slider-value-badge"
-          style={{
-            backgroundColor: `${themeColor}18`,
-            borderColor: themeColor,
-            color: themeColor,
-          }}
-        >
-          Skala {current}:{" "}
-          <strong>
-            {current <= 3
-              ? "Santai"
-              : current <= 6
-                ? "Agak Deg-degan"
-                : current <= 8
-                  ? "Gugup"
-                  : "Panik Banget"}
-          </strong>
-        </span>
-      </div>
-
-      {/* Main Track & Interactive area */}
-      <div className="slider-interactive-track">
-        {/* Visual background dual-tone track */}
-        <div className="slider-track-bg-left" />
-        <div className="slider-track-bg-right" />
-
-        {/* Dynamic progress fill */}
-        <div
-          className="slider-track-active-fill"
-          style={{
-            width: `${percent}%`,
-            backgroundColor: `${themeColor}50`,
-          }}
-        />
-
-        {/* Tick stop dots */}
-        <div className="slider-ticks-row">
-          {ticks.map((num) => {
-            const tickPercent = ((num - min) / (max - min)) * 100;
-            const isPassed = num <= current;
-            return (
-              <div
-                key={num}
-                className={`slider-tick-dot ${isPassed ? "passed" : ""}`}
-                style={{
-                  left: `${tickPercent}%`,
-                  backgroundColor: isPassed
-                    ? themeColor
-                    : "rgba(36, 50, 56, 0.2)",
-                }}
-              />
-            );
-          })}
-        </div>
-
-        {/* Custom Draggable Thumb handle */}
-        <div
-          className="slider-custom-thumb"
-          style={{
-            left: `${percent}%`,
-            borderColor: themeColor,
-          }}
-        >
-          <div
-            className="slider-thumb-inner"
-            style={{ backgroundColor: themeColor }}
-          />
-        </div>
-
-        {/* Native Range Input over the entire track for drag & touch */}
-        <input
-          type="range"
-          min={min}
-          max={max}
-          step={1}
-          value={current}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className="slider-range-overlay"
-          aria-label={question.title}
-        />
-      </div>
-
-      {/* Bottom Boundary Labels */}
-      <div className="slider-bottom-labels">
-        <span className="slider-bottom-min">
-          {question.minLabel || "Santai Aja"}
-        </span>
-        <span className="slider-bottom-max">
-          {question.maxLabel || "Panik Banget"}
-        </span>
-      </div>
-    </div>
-  );
-}
-
-/** Custom Hook for accessing real device camera */
-function useCamera(active = true) {
-  const [stream, setStream] = useState(null);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    let currentStream = null;
-    if (!active) return;
-
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices
-        .getUserMedia({
-          video: {
-            facingMode: "user",
-            width: { ideal: 1280 },
-            height: { ideal: 720 },
-          },
-          audio: true,
-        })
-        .then((s) => {
-          currentStream = s;
-          setStream(s);
-        })
-        .catch((err) => {
-          console.warn(
-            "Camera access not available or permission denied:",
-            err,
-          );
-          setError(err);
-        });
-    }
-
-    return () => {
-      if (currentStream) {
-        currentStream.getTracks().forEach((track) => track.stop());
-      }
-    };
-  }, [active]);
-
-  return { stream, error };
-}
-
-/** Step 7 – Screen 1: Video Record Introduction with Real Camera Preview */
-function VideoRecordIntro({ onStart, onSkip }) {
-  const { stream } = useCamera(true);
-  const videoRef = useRef(null);
-
-  useEffect(() => {
-    if (videoRef.current && stream) {
-      videoRef.current.srcObject = stream;
-    }
-  }, [stream]);
-
-  return (
-    <div className="video-record-intro" data-node-id="207:4828">
-      <p className="video-record-subtitle" data-node-id="207:4862">
-        Yuk rekam video singkat perkenalan diri kamu. Nggak perlu sempurna, ini
-        cuma buat lihat titik awal kamu sebelum mulai latihan.
-      </p>
-
-      <div className="camera-frame-container" data-node-id="207:4860">
-        <video
-          ref={videoRef}
-          autoPlay
-          playsInline
-          muted
-          className="camera-live-video"
-        />
-        {!stream && (
-          <div className="camera-loading-placeholder">
-            <div className="camera-loading-icon-spinner" />
-            <p className="camera-loading-label">Menghubungkan kamera...</p>
-          </div>
-        )}
-      </div>
-
-      <div className="video-buttons-wrapper" data-node-id="207:4873">
-        <button
-          type="button"
-          className="btn-questionnaire-submit"
-          onClick={onStart}
-          data-node-id="207:4838"
-        >
-          Mulai
-        </button>
-        <button
-          type="button"
-          className="btn-skip-text"
-          onClick={onSkip}
-          data-node-id="207:4866"
-        >
-          Skip
-        </button>
-      </div>
-    </div>
-  );
-}
-
-/** Step 7 – Screen 2: Real Camera Recording Mode with Audio/Video Capture */
-function VideoRecording({ onFinishRecording }) {
-  const { stream } = useCamera(true);
-  const videoRef = useRef(null);
-  const [seconds, setSeconds] = useState(0);
-  const [isRecording, setIsRecording] = useState(false);
-  const [transcript, setTranscript] = useState("");
-  const mediaRecorderRef = useRef(null);
-  const recognitionRef = useRef(null);
-  const timerRef = useRef(null);
-
-  useEffect(() => {
-    if (videoRef.current && stream) {
-      videoRef.current.srcObject = stream;
-    }
-  }, [stream]);
-
-  // Real-time speech recognition for live analysis
-  useEffect(() => {
-    const SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (SpeechRecognition) {
-      try {
-        const recognition = new SpeechRecognition();
-        recognition.continuous = true;
-        recognition.interimResults = true;
-        recognition.lang = "id-ID";
-
-        recognition.onresult = (event) => {
-          let currentTranscript = "";
-          for (let i = 0; i < event.results.length; i++) {
-            currentTranscript += event.results[i][0].transcript + " ";
-          }
-          setTranscript(currentTranscript.trim());
-        };
-
-        recognitionRef.current = recognition;
-      } catch (e) {
-        console.warn("SpeechRecognition init error:", e);
-      }
-    }
-    return () => {
-      if (recognitionRef.current) {
-        try {
-          recognitionRef.current.stop();
-        } catch (e) {}
-      }
-    };
-  }, []);
-
-  const handleToggle = () => {
-    if (isRecording) {
-      clearInterval(timerRef.current);
-      setIsRecording(false);
-
-      if (
-        mediaRecorderRef.current &&
-        mediaRecorderRef.current.state !== "inactive"
-      ) {
-        try {
-          mediaRecorderRef.current.stop();
-        } catch (e) {}
-      }
-      if (recognitionRef.current) {
-        try {
-          recognitionRef.current.stop();
-        } catch (e) {}
-      }
-
-      // Finish recording and proceed to analysis
-      setTimeout(() => {
-        onFinishRecording({ transcript, duration: seconds });
-      }, 500);
-    } else {
-      setIsRecording(true);
-      timerRef.current = setInterval(() => setSeconds((s) => s + 1), 1000);
-
-      // Start MediaRecorder if supported
-      if (stream && window.MediaRecorder) {
-        try {
-          const recorder = new MediaRecorder(stream);
-          mediaRecorderRef.current = recorder;
-          recorder.start();
-        } catch (e) {
-          console.warn("MediaRecorder start error:", e);
-        }
-      }
-
-      // Start Speech Recognition
-      if (recognitionRef.current) {
-        try {
-          recognitionRef.current.start();
-        } catch (e) {
-          console.warn("Speech recognition error:", e);
-        }
-      }
-    }
-  };
-
-  useEffect(() => () => clearInterval(timerRef.current), []);
-
-  const formatTime = (s) => {
-    const m = Math.floor(s / 60)
-      .toString()
-      .padStart(2, "0");
-    const sec = (s % 60).toString().padStart(2, "0");
-    return `${m}:${sec}`;
+  const handleTrackClick = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+    const rawVal = Math.round(min + ratio * (max - min));
+    onChange(rawVal);
   };
 
   return (
-    <div className="video-recording-screen" data-node-id="207:4898">
-      <p className="video-prompt-text" data-node-id="207:4907">
-        &ldquo;Ceritain sedikit tentang dirimu seperti nama, asal, atau hal
-        random yang lagi kamu suka akhir-akhir ini.&rdquo;
-      </p>
-
-      <div className="camera-frame-container recording" data-node-id="207:4900">
-        <video
-          ref={videoRef}
-          autoPlay
-          playsInline
-          muted
-          className="camera-live-video"
-        />
-        {!stream && (
-          <div className="camera-loading-placeholder">
-            <div className="camera-loading-icon-spinner" />
-            <p className="camera-loading-label">Menghubungkan kamera...</p>
-          </div>
-        )}
-
-        {/* Timer overlay badge */}
-        <div
-          className={`recording-timer-badge ${isRecording ? "is-recording" : ""}`}
-          data-node-id="207:4909"
-        >
-          <img src={recordDot} alt="" className="rec-dot" />
-          <span className="rec-time" data-node-id="207:4910">
-            {formatTime(seconds)}
-          </span>
-        </div>
-
-        {/* Live speech transcription subtitle */}
-        {isRecording && transcript && (
-          <div className="live-transcript-bubble">
-            &ldquo;{transcript}&rdquo;
-          </div>
-        )}
+    <div className="modern-slider-container" data-node-id="207:3170">
+      {/* Dynamic current value display */}
+      <div className="slider-current-badge">
+        <span className="slider-badge-val">{current}</span>
       </div>
 
-      {/* Record button */}
-      <button
-        type="button"
-        className={`btn-record ${isRecording ? "is-recording" : ""}`}
-        onClick={handleToggle}
-        aria-label={isRecording ? "Berhenti rekam" : "Mulai rekam"}
-        data-node-id="212:4915"
+      {/* Track & thumb layer */}
+      <div
+        className="slider-interactive-track"
+        onClick={handleTrackClick}
+        role="slider"
+        aria-valuenow={current}
+        aria-valuemin={min}
+        aria-valuemax={max}
+        tabIndex={0}
       >
-        {isRecording ? (
-          <span className="record-stop-square" />
-        ) : (
-          <img src={recordBtn} alt="Record" className="record-icon" />
-        )}
-      </button>
+        {/* Full grey rail */}
+        <div className="slider-track-bg" />
+
+        {/* Teal active fill */}
+        <div
+          className="slider-track-fill"
+          style={{ width: `${percent}%` }}
+        />
+
+        {/* Circular Draggable Thumb */}
+        <div
+          className="slider-thumb"
+          style={{ left: `${percent}%` }}
+        />
+      </div>
+
+      {/* Discrete tick points */}
+      <div className="slider-ticks-row">
+        {ticks.map((t) => (
+          <span
+            key={t}
+            className={`slider-tick ${t === current ? "active" : ""}`}
+            onClick={() => onChange(t)}
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+
+      {/* Bottom min / max descriptive labels */}
+      <div className="slider-labels-row">
+        <span className="slider-label-min">{question.minLabel}</span>
+        <span className="slider-label-max">{question.maxLabel}</span>
+      </div>
     </div>
   );
 }
@@ -558,8 +243,6 @@ export default function Questionnaires({
 }) {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [answers, setAnswers] = useState({});
-  // Step-7 sub-screen: "intro" | "recording"
-  const [step7Screen, setStep7Screen] = useState("intro");
 
   const totalSteps = questions.length;
   const currentQuestion = questions[currentStepIndex];
@@ -579,106 +262,11 @@ export default function Questionnaires({
   };
 
   const handleBack = () => {
-    if (
-      currentQuestion.type === "video_record" &&
-      step7Screen === "recording"
-    ) {
-      setStep7Screen("intro");
-      return;
-    }
     if (isFirstStep) {
       if (onBackToOnboarding) onBackToOnboarding();
     } else {
       setCurrentStepIndex((i) => i - 1);
     }
-  };
-
-  // Render the answer input based on type
-  const renderBody = () => {
-    const q = currentQuestion;
-    const val = answers[q.id];
-
-    if (q.type === "video_record") {
-      if (step7Screen === "intro") {
-        return (
-          <VideoRecordIntro
-            onStart={() => setStep7Screen("recording")}
-            onSkip={handleNext}
-          />
-        );
-      }
-      return (
-        <VideoRecording
-          onFinishRecording={() => {
-            setAnswer(q.id, "recorded");
-            handleNext();
-          }}
-        />
-      );
-    }
-
-    return (
-      <>
-        {/* Question Title + Illustration */}
-        <div className="question-header-content" data-node-id="207:3166">
-          <h1 className="question-title" data-node-id="207:3167">
-            {q.title}
-          </h1>
-          {q.illustration && (
-            <div
-              className="question-illustration-container"
-              data-node-id="207:3168"
-            >
-              <img
-                src={q.illustration}
-                alt=""
-                className="question-illustration"
-              />
-            </div>
-          )}
-        </div>
-
-        {/* Input area */}
-        <div className="question-input-area">
-          {q.type === "tags_multi" && (
-            <TagsMultiInput
-              question={q}
-              value={val}
-              onChange={(v) => setAnswer(q.id, v)}
-            />
-          )}
-          {q.type === "radio" && (
-            <RadioInput
-              question={q}
-              value={val}
-              onChange={(v) => setAnswer(q.id, v)}
-            />
-          )}
-          {(q.type === "slider" ||
-            q.type === "scale" ||
-            q.type === "centered_slider" ||
-            q.type === "scale_boxes") && (
-            <ModernSliderInput
-              question={q}
-              value={val}
-              onChange={(v) => setAnswer(q.id, v)}
-            />
-          )}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="questionnaire-footer" data-node-id="207:3174">
-          <button
-            type="button"
-            className="btn-questionnaire-submit"
-            onClick={handleNext}
-            data-node-id="207:3175"
-          >
-            {isLastStep ? "Selesai" : "Lanjut"}
-          </button>
-        </div>
-      </>
-    );
   };
 
   return (
@@ -701,7 +289,7 @@ export default function Questionnaires({
         <div className="topbar-nav-row" data-node-id="207:3159">
           <button
             type="button"
-            className={`btn-nav-back ${isFirstStep && currentQuestion.type !== "video_record" ? "is-first-step" : ""}`}
+            className={`btn-nav-back ${isFirstStep ? "is-first-step" : ""}`}
             onClick={handleBack}
             aria-label="Kembali"
           >
@@ -715,7 +303,64 @@ export default function Questionnaires({
 
       {/* ── Main Form Section ─────────────────────────────────── */}
       <main className="questionnaire-form-section" data-node-id="207:3165">
-        {renderBody()}
+        {/* Question Title + Illustration */}
+        <div className="question-header-content" data-node-id="207:3166">
+          <h1 className="question-title" data-node-id="207:3167">
+            {currentQuestion.title}
+          </h1>
+          {currentQuestion.illustration && (
+            <div
+              className="question-illustration-container"
+              data-node-id="207:3168"
+            >
+              <img
+                src={currentQuestion.illustration}
+                alt=""
+                className="question-illustration"
+              />
+            </div>
+          )}
+        </div>
+
+        {/* Input area */}
+        <div className="question-input-area">
+          {currentQuestion.type === "tags_multi" && (
+            <TagsMultiInput
+              question={currentQuestion}
+              value={answers[currentQuestion.id]}
+              onChange={(v) => setAnswer(currentQuestion.id, v)}
+            />
+          )}
+          {currentQuestion.type === "radio" && (
+            <RadioInput
+              question={currentQuestion}
+              value={answers[currentQuestion.id]}
+              onChange={(v) => setAnswer(currentQuestion.id, v)}
+            />
+          )}
+          {(currentQuestion.type === "slider" ||
+            currentQuestion.type === "scale" ||
+            currentQuestion.type === "centered_slider" ||
+            currentQuestion.type === "scale_boxes") && (
+            <ModernSliderInput
+              question={currentQuestion}
+              value={answers[currentQuestion.id]}
+              onChange={(v) => setAnswer(currentQuestion.id, v)}
+            />
+          )}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="questionnaire-footer" data-node-id="207:3174">
+          <button
+            type="button"
+            className="btn-questionnaire-submit"
+            onClick={handleNext}
+            data-node-id="207:3175"
+          >
+            {isLastStep ? "Selesai" : "Lanjut"}
+          </button>
+        </div>
       </main>
     </div>
   );
