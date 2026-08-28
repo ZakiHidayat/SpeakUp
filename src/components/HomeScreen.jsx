@@ -4,6 +4,7 @@ import "./HomeScreen.css";
 // ─── Assets ──────────────────────────────────────────────────────────────────
 import todaysLessonImg from "../assets/pages_assets/modul_details/modul_7/Image-Lesson6.png";
 import cardBgDecor from "../assets/pages_assets/home/Card-bg-decor.svg";
+
 // Module illustrations
 import imgModul1 from "../assets/pages_assets/home/modul/Image-Modul1.png";
 import imgModul2 from "../assets/pages_assets/home/modul/Image-Modul2.png";
@@ -29,7 +30,7 @@ import iconNavMic from "../assets/pages_assets/bottom-nav-icons/Mic.svg";
 import iconNavGroup from "../assets/pages_assets/bottom-nav-icons/Group.svg";
 import iconNavUser from "../assets/pages_assets/bottom-nav-icons/User.svg";
 
-// ─── Inline icon for progress (no asset provided) ────────────────────────────
+// ─── Inline icon for progress ────────────────────────────────────────────────
 const IconProgress = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="8" cy="8" r="5.5" stroke="#DA5000" strokeWidth="1.5" strokeDasharray="4 2"/>
@@ -94,50 +95,51 @@ export default function HomeScreen({
 
       {/* ── Scrollable Body ─────────────────────────────────────── */}
       <div className="home-scroll-body">
-        <div className="home-content">
-          
-          {/* ── Streak Section ────────────────────────────────── */}
-          <div className="home-streak-section" data-node-id="31:332">
-            <p className="home-streak-title" data-node-id="31:333">4 Hari Streak!</p>
-            <p className="home-streak-subtitle" data-node-id="31:334">
-              Latihan tiap hari biar kemampuan bicaramu makin terasah.
-            </p>
+        <div className="home-hero-section" data-node-id="75:939">
 
-            <div className="home-streak-days-list" data-node-id="31:335">
+          {/* ── Streak Card ──────────────────────────────────────── */}
+          <div className="home-streak-card" data-node-id="68:603">
+            <div className="home-streak-badge" data-node-id="127:267">
+              <span className="home-streak-fire-emoji">🔥</span>
+              <span className="home-streak-label">12 Hari streak</span>
+            </div>
+            <div className="home-streak-days" data-node-id="127:266">
               {STREAK_DAYS.map((day) => (
-                <div key={day.id} className="home-streak-day-col" data-node-id={day.nodeId}>
-                  <div className="home-streak-icon-wrap" data-node-id={day.circleNodeId}>
-                    {day.status === "past" && (
-                      <img src={fireActiveImg} alt="Active Streak" className="home-streak-fire-img" />
-                    )}
-                    {day.status === "today" && (
-                      <img src={fireTodayGif} alt="Today Streak" className="home-streak-fire-gif" />
-                    )}
-                    {day.status === "inactive" && (
-                      <img src={circleInactiveImg} alt="Inactive" className="home-streak-circle-img" />
+                <div
+                  key={day.label}
+                  className={`home-streak-day ${day.active ? "home-streak-day--active" : ""} ${day.today ? "home-streak-day--today" : ""}`}
+                >
+                  <div className="home-streak-day-icon">
+                    {day.today ? (
+                      <img src={fireTodayGif} alt="" className="home-streak-fire-img" />
+                    ) : day.active ? (
+                      <img src={fireActiveImg} alt="" className="home-streak-fire-img" />
+                    ) : (
+                      <img src={circleInactiveImg} alt="" className="home-streak-fire-img" />
                     )}
                   </div>
-                  <span className={`home-streak-day-label ${day.status !== "inactive" ? "active" : ""}`}>
-                    {day.label}
-                  </span>
+                  <span className="home-streak-day-label">{day.label}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* ── Today's Lesson Section ────────────────────────── */}
-          <div className="home-todays-lesson-section" data-node-id="136:1385">
+          {/* ── Today's Lesson Section (Starts Module 7) ── */}
+          <div className="home-todays-lesson-section" data-node-id="136:1421">
             <div
               className="home-todays-lesson-card"
               onClick={() => handleModuleClick(MODULES.find((m) => m.id === 7) || MODULES[6])}
               data-node-id="136:1386"
               style={{ cursor: "pointer" }}
             >
-              <div className="home-lesson-bg-decor" aria-hidden="true" data-node-id="136:1387">
-                <img src={cardBgDecor} alt="" className="home-lesson-bg-decor-img" />
+              {/* Full Card Background Decor */}
+              <div className="home-lesson-card-bg-decor" aria-hidden="true">
+                <img src={cardBgDecor} alt="" className="home-lesson-card-bg-img" />
               </div>
-              <div className="home-lesson-content" data-node-id="136:1388">
-                <div className="home-lesson-text-block">
+
+              {/* Content row */}
+              <div className="home-lesson-card-content" data-node-id="136:1399">
+                <div className="home-lesson-text" data-node-id="136:1389">
                   <p className="home-lesson-subtitle">Pelajaran Hari ini</p>
                   <p className="home-lesson-title">Hadapi Pertanyaan Menantang</p>
                   <p className="home-lesson-module">Modul 7 - Keahlian Tanya Jawab</p>
@@ -146,18 +148,21 @@ export default function HomeScreen({
                   <img src={todaysLessonImg} alt="Hadapi Pertanyaan Menantang" className="home-lesson-image" />
                 </div>
               </div>
-            </div>
 
-            {/* Mulai Pelajaran Button */}
-            <button
-              type="button"
-              className="btn-mulai-pelajaran"
-              onClick={() => handleModuleClick(MODULES.find((m) => m.id === 7) || MODULES[6])}
-              data-node-id="136:1414"
-            >
-              <img src={iconPlay} alt="" className="btn-play-icon" />
-              <span>Mulai Pelajaran</span>
-            </button>
+              {/* Mulai Pelajaran Button */}
+              <button
+                type="button"
+                className="btn-mulai-pelajaran"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleModuleClick(MODULES.find((m) => m.id === 7) || MODULES[6]);
+                }}
+                data-node-id="136:1414"
+              >
+                <img src={iconPlay} alt="" className="btn-play-icon" />
+                <span>Mulai Pelajaran</span>
+              </button>
+            </div>
           </div>
 
           {/* ── Course Section ────────────────────────────────── */}
@@ -169,37 +174,30 @@ export default function HomeScreen({
                 return (
                   <div
                     key={mod.id}
-                    className={`home-module-card ${mod.active ? "home-module-card--active" : ""} ${mod.inactive ? "home-module-card--inactive" : ""} ${isAvailable ? "home-module-card--available" : ""}`}
+                    className={`home-module-item ${mod.active || mod.highlight ? "home-module-item--active home-module-item--highlight" : ""} ${mod.inactive ? "home-module-item--inactive" : ""} ${isAvailable ? "home-module-item--available" : "home-module-item--disabled"}`}
                     onClick={() => handleModuleClick(mod)}
                     style={{ cursor: isAvailable ? "pointer" : "default" }}
                     data-node-id={`module-${mod.id}`}
                   >
-                    {/* Left content: Tag, title, lessons count, progress */}
-                    <div className="home-module-info">
-                      {mod.tag && (
-                        <div className="home-module-tag-wrapper">
+                    <div className="home-module-content">
+                      <div className="home-module-text">
+                        {mod.tag && (
                           <span className="home-module-tag">{mod.tag}</span>
-                        </div>
-                      )}
-                      <h4 className="home-module-title">{mod.module} - {mod.title}</h4>
-                      
-                      <div className="home-module-meta-row">
-                        <div className="home-module-lessons-count">
-                          <img src={iconBook} alt="" className="home-module-book-icon" />
+                        )}
+                        <span className="home-module-title">{mod.module} - {mod.title}</span>
+                      </div>
+                      <div className="home-module-meta">
+                        <div className="home-module-meta-item">
+                          <img src={iconBook} alt="" className="home-module-meta-icon" />
                           <span>{mod.lessons} Pelajaran</span>
                         </div>
-                        <div className="home-module-progress-chip">
+                        <div className="home-module-meta-item">
                           <IconProgress />
-                          <span>{mod.progress}</span>
+                          <span>{mod.progress} Selesai</span>
                         </div>
                       </div>
                     </div>
-
-                    {/* Right illustration */}
-                    <div
-                      className={`home-module-illus ${mod.active ? "home-module-illus--active" : ""}`}
-                      style={{ backgroundColor: MODULE_COLORS[i % MODULE_COLORS.length] }}
-                    >
+                    <div className="home-module-illus" style={{ backgroundColor: MODULE_COLORS[i % MODULE_COLORS.length] }}>
                       <img
                         src={mod.image}
                         alt={mod.title}
