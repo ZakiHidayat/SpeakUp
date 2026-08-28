@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { ExitLessonModal } from "./LessonScreen";
 import "./LessonModul7Screen.css";
 
 // ─── Assets for Modul 7 Lesson 6 ─────────────────────────────────────────────
@@ -19,15 +20,15 @@ const IconArrowLeft = ({ color = "#243238" }) => (
 );
 
 // ─── TopBar with progress bar ─────────────────────────────────────────────────
-function LessonTopBar({ currentStep, totalSteps, onBack, isDark = false }) {
+function LessonTopBar({ currentStep, totalSteps, onTopBarBack, isDark = false }) {
   const progress = (currentStep / totalSteps) * 100;
   return (
     <div className={`modul7-lesson-topbar ${isDark ? "modul7-topbar--dark" : ""}`} data-node-id="329:1660">
       <button
         type="button"
         className={`modul7-lesson-back-btn ${isDark ? "modul7-back-btn--dark" : ""}`}
-        onClick={onBack}
-        aria-label="Kembali"
+        onClick={onTopBarBack}
+        aria-label="Keluar Pelajaran"
         data-node-id="339:2630"
       >
         <IconArrowLeft color={isDark ? "#FFFFFF" : "#243238"} />
@@ -46,10 +47,10 @@ function LessonTopBar({ currentStep, totalSteps, onBack, isDark = false }) {
 }
 
 // ─── Page 1: Pernah nggak ngerasa... (Figma node 329:1659) ───────────────────
-function LessonPage1({ onNext, onBack }) {
+function LessonPage1({ onNext, onTopBarBack }) {
   return (
     <div className="modul7-lesson-page" data-node-id="329:1659" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={1} totalSteps={17} onBack={onBack} />
+      <LessonTopBar currentStep={1} totalSteps={17} onTopBarBack={onTopBarBack} />
 
       <div className="modul7-lesson-content" data-node-id="329:1669">
         <h2 className="modul7-lesson-heading" data-node-id="329:1670">
@@ -116,10 +117,10 @@ function LessonPage1({ onNext, onBack }) {
 }
 
 // ─── Page 2: Quotes / Mindset (Figma node 329:1710) ──────────────────────────
-function LessonPage2({ onNext, onBack }) {
+function LessonPage2({ onNext, onBack, onTopBarBack }) {
   return (
     <div className="modul7-lesson-page modul7-lesson-page-2" data-node-id="329:1710" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={2} totalSteps={17} onBack={onBack} />
+      <LessonTopBar currentStep={2} totalSteps={17} onTopBarBack={onTopBarBack} />
 
       {/* Center Quotes Area */}
       <div className="modul7-page2-content" data-node-id="329:1719">
@@ -162,10 +163,10 @@ function LessonPage2({ onNext, onBack }) {
 }
 
 // ─── Page 3: Cognitive Restructuring (Figma node 329:1733) ───────────────────
-function LessonPage3({ onNext, onBack }) {
+function LessonPage3({ onNext, onBack, onTopBarBack }) {
   return (
     <div className="modul7-lesson-page" data-node-id="329:1733" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={3} totalSteps={17} onBack={onBack} />
+      <LessonTopBar currentStep={3} totalSteps={17} onTopBarBack={onTopBarBack} />
 
       <div className="modul7-lesson-content modul7-page3-content" data-node-id="329:1742">
         {/* Title Header */}
@@ -235,10 +236,10 @@ function LessonPage3({ onNext, onBack }) {
 }
 
 // ─── Page 4: Cognitive Defusion (Figma node 333:1784) ─────────────────────────
-function LessonPage4({ onNext, onBack }) {
+function LessonPage4({ onNext, onBack, onTopBarBack }) {
   return (
     <div className="modul7-lesson-page" data-node-id="333:1784" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={4} totalSteps={17} onBack={onBack} />
+      <LessonTopBar currentStep={4} totalSteps={17} onTopBarBack={onTopBarBack} />
 
       <div className="modul7-lesson-content modul7-page4-content" data-node-id="333:1786">
         {/* Header */}
@@ -325,10 +326,10 @@ function LessonPage4({ onNext, onBack }) {
 }
 
 // ─── Page 5: Conclusion / Empowering Mindset (Figma node 334:1816) ───────────
-function LessonPage5({ onNext, onBack }) {
+function LessonPage5({ onNext, onBack, onTopBarBack }) {
   return (
     <div className="modul7-lesson-page modul7-lesson-page-2" data-node-id="334:1816" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={5} totalSteps={17} onBack={onBack} />
+      <LessonTopBar currentStep={5} totalSteps={17} onTopBarBack={onTopBarBack} />
 
       {/* Center Quotes Area */}
       <div className="modul7-page2-content" data-node-id="334:1825">
@@ -371,10 +372,10 @@ function LessonPage5({ onNext, onBack }) {
 }
 
 // ─── Page 6: Teknik Merespons Kritik (Figma node 334:1838) ───────────────────
-function LessonPage6({ onNext, onBack }) {
+function LessonPage6({ onNext, onBack, onTopBarBack }) {
   return (
     <div className="modul7-lesson-page" data-node-id="334:1838" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={6} totalSteps={17} onBack={onBack} />
+      <LessonTopBar currentStep={6} totalSteps={17} onTopBarBack={onTopBarBack} />
 
       <div className="modul7-lesson-content modul7-page6-content" data-node-id="334:1847">
         {/* Title Header */}
@@ -471,10 +472,10 @@ const SCENARIO_STEPS = [
   { id: 6, num: 7, text: "Feedback" },
 ];
 
-function LessonPage7({ onNext, onBack }) {
+function LessonPage7({ onNext, onBack, onTopBarBack }) {
   return (
     <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="338:1896" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={7} totalSteps={17} onBack={onBack} isDark={true} />
+      <LessonTopBar currentStep={7} totalSteps={17} onTopBarBack={onTopBarBack} isDark={true} />
 
       <div className="modul7-lesson-content modul7-page7-content" data-node-id="338:1905">
         {/* Header */}
@@ -527,7 +528,7 @@ function LessonPage7({ onNext, onBack }) {
 }
 
 // ─── Page 8: Tema Latihan (Figma node 338:1946) ───────────────────────────────
-function LessonPage8({ onNext, onBack }) {
+function LessonPage8({ onNext, onBack, onTopBarBack }) {
   const [countdown, setCountdown] = useState(10);
 
   useEffect(() => {
@@ -543,7 +544,7 @@ function LessonPage8({ onNext, onBack }) {
 
   return (
     <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="338:1946" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={8} totalSteps={17} onBack={onBack} isDark={true} />
+      <LessonTopBar currentStep={8} totalSteps={17} onTopBarBack={onTopBarBack} isDark={true} />
 
       <div className="modul7-lesson-content modul7-page8-content" data-node-id="338:1947">
         {/* Main Theme Topic Wrapper */}
@@ -587,7 +588,7 @@ function LessonPage8({ onNext, onBack }) {
 }
 
 // ─── Page 9: Waktu Persiapan & Kerangka Cepat (Figma node 339:2254) ────────────
-function LessonPage9({ onNext, onBack }) {
+function LessonPage9({ onNext, onBack, onTopBarBack }) {
   const [secondsLeft, setSecondsLeft] = useState(120);
   const [notes, setNotes] = useState({
     point1: "",
@@ -615,7 +616,7 @@ function LessonPage9({ onNext, onBack }) {
 
   return (
     <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="339:2254" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={9} totalSteps={17} onBack={onBack} isDark={true} />
+      <LessonTopBar currentStep={9} totalSteps={17} onTopBarBack={onTopBarBack} isDark={true} />
 
       <div className="modul7-lesson-content modul7-page9-content" data-node-id="339:2255">
         {/* Waktu Persiapan Top Banner */}
@@ -712,7 +713,7 @@ function LessonPage9({ onNext, onBack }) {
 }
 
 // ─── Page 10: Sampaikan Pendapatmu & Real Mic Wave (Figma node 339:2362) ──────
-function LessonPage10({ onNext, onBack }) {
+function LessonPage10({ onNext, onBack, onTopBarBack }) {
   const [secondsLeft, setSecondsLeft] = useState(120);
   const [audioLevels, setAudioLevels] = useState([39, 15, 26, 26, 39]);
   const audioContextRef = useRef(null);
@@ -823,7 +824,7 @@ function LessonPage10({ onNext, onBack }) {
     onNext();
   };
 
-  const handleBack = () => {
+  const handleBackAction = () => {
     if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     if (streamRef.current) {
       streamRef.current.getTracks().forEach((t) => t.stop());
@@ -834,6 +835,17 @@ function LessonPage10({ onNext, onBack }) {
     onBack();
   };
 
+  const handleTopBarBackAction = () => {
+    if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((t) => t.stop());
+    }
+    if (audioContextRef.current && audioContextRef.current.state !== "closed") {
+      audioContextRef.current.close().catch(() => {});
+    }
+    onTopBarBack();
+  };
+
   const formatTimer = (sec) => {
     const m = Math.floor(sec / 60);
     const s = sec % 60;
@@ -842,7 +854,7 @@ function LessonPage10({ onNext, onBack }) {
 
   return (
     <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="339:2362" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={10} totalSteps={17} onBack={handleBack} isDark={true} />
+      <LessonTopBar currentStep={10} totalSteps={17} onTopBarBack={handleTopBarBackAction} isDark={true} />
 
       <div className="modul7-lesson-content modul7-page10-content" data-node-id="339:2363">
         {/* Title Heading */}
@@ -886,10 +898,10 @@ function LessonPage10({ onNext, onBack }) {
 }
 
 // ─── Page 11: Argumenmu sudah siap! (Figma node 339:2395) ────────────────────
-function LessonPage11({ onNext, onBack }) {
+function LessonPage11({ onNext, onBack, onTopBarBack }) {
   return (
     <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="339:2395" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={11} totalSteps={17} onBack={onBack} isDark={true} />
+      <LessonTopBar currentStep={11} totalSteps={17} onTopBarBack={onTopBarBack} isDark={true} />
 
       <div className="modul7-lesson-content modul7-page11-content" data-node-id="339:2396">
         {/* Stage Hero Image */}
@@ -938,7 +950,7 @@ function LessonPage11({ onNext, onBack }) {
 }
 
 // ─── Page 12: Pertanyaan #1 Prompt (Figma node 339:2449) ──────────────────────
-function LessonPage12({ onNext, onBack }) {
+function LessonPage12({ onNext, onBack, onTopBarBack }) {
   const [countdown, setCountdown] = useState(15);
 
   useEffect(() => {
@@ -954,7 +966,7 @@ function LessonPage12({ onNext, onBack }) {
 
   return (
     <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="339:2449" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={12} totalSteps={17} onBack={onBack} isDark={true} />
+      <LessonTopBar currentStep={12} totalSteps={17} onTopBarBack={onTopBarBack} isDark={true} />
 
       <div className="modul7-lesson-content modul7-page12-content" data-node-id="339:2450">
         {/* Top Step Counter 1/2 */}
@@ -994,7 +1006,7 @@ function LessonPage12({ onNext, onBack }) {
 }
 
 // ─── Page 13: Jawab Pertanyaan #1 (Figma node 339:2489) ───────────────────────
-function LessonPage13({ onNext, onBack }) {
+function LessonPage13({ onNext, onBack, onTopBarBack }) {
   const [secondsLeft, setSecondsLeft] = useState(60);
   const [audioLevels, setAudioLevels] = useState([39, 15, 26, 26, 39]);
   const audioContextRef = useRef(null);
@@ -1105,7 +1117,7 @@ function LessonPage13({ onNext, onBack }) {
     onNext();
   };
 
-  const handleBack = () => {
+  const handleBackAction = () => {
     if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     if (streamRef.current) {
       streamRef.current.getTracks().forEach((t) => t.stop());
@@ -1116,6 +1128,17 @@ function LessonPage13({ onNext, onBack }) {
     onBack();
   };
 
+  const handleTopBarBackAction = () => {
+    if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((t) => t.stop());
+    }
+    if (audioContextRef.current && audioContextRef.current.state !== "closed") {
+      audioContextRef.current.close().catch(() => {});
+    }
+    onTopBarBack();
+  };
+
   const formatTimer = (sec) => {
     const m = Math.floor(sec / 60);
     const s = sec % 60;
@@ -1124,7 +1147,7 @@ function LessonPage13({ onNext, onBack }) {
 
   return (
     <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="339:2489" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={13} totalSteps={17} onBack={handleBack} isDark={true} />
+      <LessonTopBar currentStep={13} totalSteps={17} onTopBarBack={handleTopBarBackAction} isDark={true} />
 
       <div className="modul7-lesson-content modul7-page13-content" data-node-id="339:2490">
         {/* Top Step Counter 1/2 */}
@@ -1178,10 +1201,10 @@ function LessonPage13({ onNext, onBack }) {
 }
 
 // ─── Page 14: Hebat, Tapi... (Figma node 339:2540) ───────────────────────────
-function LessonPage14({ onNext, onBack }) {
+function LessonPage14({ onNext, onBack, onTopBarBack }) {
   return (
     <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="339:2540" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={14} totalSteps={17} onBack={onBack} isDark={true} />
+      <LessonTopBar currentStep={14} totalSteps={17} onTopBarBack={onTopBarBack} isDark={true} />
 
       <div className="modul7-lesson-content modul7-page14-content" data-node-id="339:2541">
         {/* Top Step Counter 1/2 */}
@@ -1225,7 +1248,7 @@ function LessonPage14({ onNext, onBack }) {
 }
 
 // ─── Page 15: Pertanyaan #2 Prompt (Figma node 339:2563) ──────────────────────
-function LessonPage15({ onNext, onBack }) {
+function LessonPage15({ onNext, onBack, onTopBarBack }) {
   const [countdown, setCountdown] = useState(15);
 
   useEffect(() => {
@@ -1241,7 +1264,7 @@ function LessonPage15({ onNext, onBack }) {
 
   return (
     <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="339:2563" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={15} totalSteps={17} onBack={onBack} isDark={true} />
+      <LessonTopBar currentStep={15} totalSteps={17} onTopBarBack={onTopBarBack} isDark={true} />
 
       <div className="modul7-lesson-content modul7-page12-content" data-node-id="339:2564">
         {/* Top Step Counter 2/2 */}
@@ -1281,7 +1304,7 @@ function LessonPage15({ onNext, onBack }) {
 }
 
 // ─── Page 16: Jawab Pertanyaan #2 (Figma node 339:2580) ───────────────────────
-function LessonPage16({ onNext, onBack }) {
+function LessonPage16({ onNext, onBack, onTopBarBack }) {
   const [secondsLeft, setSecondsLeft] = useState(60);
   const [audioLevels, setAudioLevels] = useState([39, 15, 26, 26, 39]);
   const audioContextRef = useRef(null);
@@ -1392,7 +1415,7 @@ function LessonPage16({ onNext, onBack }) {
     onNext();
   };
 
-  const handleBack = () => {
+  const handleBackAction = () => {
     if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     if (streamRef.current) {
       streamRef.current.getTracks().forEach((t) => t.stop());
@@ -1403,6 +1426,17 @@ function LessonPage16({ onNext, onBack }) {
     onBack();
   };
 
+  const handleTopBarBackAction = () => {
+    if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((t) => t.stop());
+    }
+    if (audioContextRef.current && audioContextRef.current.state !== "closed") {
+      audioContextRef.current.close().catch(() => {});
+    }
+    onTopBarBack();
+  };
+
   const formatTimer = (sec) => {
     const m = Math.floor(sec / 60);
     const s = sec % 60;
@@ -1411,7 +1445,7 @@ function LessonPage16({ onNext, onBack }) {
 
   return (
     <div className="modul7-lesson-page modul7-lesson-page-dark" data-node-id="339:2580" data-name="Lesson-Hadapi Pertanyaan Menantang">
-      <LessonTopBar currentStep={16} totalSteps={17} onBack={handleBack} isDark={true} />
+      <LessonTopBar currentStep={16} totalSteps={17} onTopBarBack={handleTopBarBackAction} isDark={true} />
 
       <div className="modul7-lesson-content modul7-page13-content" data-node-id="339:2581">
         {/* Top Step Counter 2/2 */}
@@ -1465,10 +1499,10 @@ function LessonPage16({ onNext, onBack }) {
 }
 
 // ─── Page 17: Conclusion Lesson / Selesaikan Pelajaran (Figma node 339:2604) ──
-function LessonPage17({ onNext, onBack }) {
+function LessonPage17({ onNext, onBack, onTopBarBack }) {
   return (
     <div className="modul7-lesson-page modul7-lesson-page-light" data-node-id="339:2604" data-name="Conclusion-Lesson">
-      <LessonTopBar currentStep={17} totalSteps={17} onBack={onBack} isDark={false} />
+      <LessonTopBar currentStep={17} totalSteps={17} onTopBarBack={onTopBarBack} isDark={false} />
 
       <div className="modul7-lesson-content modul7-page17-content" data-node-id="339:2617">
         {/* Happy Speaker Animation Video */}
@@ -1595,6 +1629,16 @@ function CompletedLesson({ onFinish }) {
 // ─── Main Lesson 6 Modul 7 Screen ────────────────────────────────────────────
 export default function LessonModul7Screen({ onBack, onFinish }) {
   const [step, setStep] = useState(1);
+  const [showExitModal, setShowExitModal] = useState(false);
+
+  const handleTopBarBack = () => {
+    setShowExitModal(true);
+  };
+
+  const handleConfirmExit = () => {
+    setShowExitModal(false);
+    onBack?.();
+  };
 
   const goNext = () => {
     setStep((prev) => {
@@ -1622,7 +1666,6 @@ export default function LessonModul7Screen({ onBack, onFinish }) {
   const goPrev = () => {
     setStep((prev) => {
       if (prev === 1) {
-        onBack?.();
         return 1;
       }
       if (prev === 2) return 1;
@@ -1649,24 +1692,31 @@ export default function LessonModul7Screen({ onBack, onFinish }) {
 
   return (
     <div className="modul7-lesson-screen">
-      {step === 1 && <LessonPage1 onNext={goNext} onBack={goPrev} />}
-      {step === 2 && <LessonPage2 onNext={goNext} onBack={goPrev} />}
-      {step === 3 && <LessonPage3 onNext={goNext} onBack={goPrev} />}
-      {step === 4 && <LessonPage4 onNext={goNext} onBack={goPrev} />}
-      {step === 5 && <LessonPage5 onNext={goNext} onBack={goPrev} />}
-      {step === 6 && <LessonPage6 onNext={goNext} onBack={goPrev} />}
-      {step === 7 && <LessonPage7 onNext={goNext} onBack={goPrev} />}
-      {step === 8 && <LessonPage8 onNext={goNext} onBack={goPrev} />}
-      {step === 9 && <LessonPage9 onNext={goNext} onBack={goPrev} />}
-      {step === 10 && <LessonPage10 onNext={goNext} onBack={goPrev} />}
-      {step === 11 && <LessonPage11 onNext={goNext} onBack={goPrev} />}
-      {step === 12 && <LessonPage12 onNext={goNext} onBack={goPrev} />}
-      {step === 13 && <LessonPage13 onNext={goNext} onBack={goPrev} />}
-      {step === 14 && <LessonPage14 onNext={goNext} onBack={goPrev} />}
-      {step === 15 && <LessonPage15 onNext={goNext} onBack={goPrev} />}
-      {step === 16 && <LessonPage16 onNext={goNext} onBack={goPrev} />}
-      {step === 17 && <LessonPage17 onNext={goNext} onBack={goPrev} />}
+      {step === 1 && <LessonPage1 onNext={goNext} onTopBarBack={handleTopBarBack} />}
+      {step === 2 && <LessonPage2 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
+      {step === 3 && <LessonPage3 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
+      {step === 4 && <LessonPage4 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
+      {step === 5 && <LessonPage5 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
+      {step === 6 && <LessonPage6 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
+      {step === 7 && <LessonPage7 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
+      {step === 8 && <LessonPage8 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
+      {step === 9 && <LessonPage9 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
+      {step === 10 && <LessonPage10 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
+      {step === 11 && <LessonPage11 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
+      {step === 12 && <LessonPage12 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
+      {step === 13 && <LessonPage13 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
+      {step === 14 && <LessonPage14 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
+      {step === 15 && <LessonPage15 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
+      {step === 16 && <LessonPage16 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
+      {step === 17 && <LessonPage17 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
       {step === "completed" && <CompletedLesson onFinish={onFinish} />}
+
+      {/* Exit Confirmation Modal */}
+      <ExitLessonModal
+        isOpen={showExitModal}
+        onClose={() => setShowExitModal(false)}
+        onConfirm={handleConfirmExit}
+      />
     </div>
   );
 }

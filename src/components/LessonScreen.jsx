@@ -32,16 +32,53 @@ const IconArrowLeft = () => (
   </svg>
 );
 
+// ─── Exit Lesson Confirmation Modal ──────────────────────────────────────────
+export function ExitLessonModal({ isOpen, onClose, onConfirm }) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="exit-lesson-modal-overlay" onClick={onClose}>
+      <div className="exit-lesson-modal-card" onClick={(e) => e.stopPropagation()}>
+        <div className="exit-lesson-modal-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 9V13M12 17H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#E8753D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+        <h3 className="exit-lesson-modal-title">Keluar dari Pelajaran?</h3>
+        <p className="exit-lesson-modal-desc">
+          Progres latihanmu saat ini tidak akan tersimpan jika kamu keluar sekarang.
+        </p>
+        <div className="exit-lesson-modal-actions">
+          <button
+            type="button"
+            className="btn-exit-modal-resume"
+            onClick={onClose}
+          >
+            Lanjut Belajar
+          </button>
+          <button
+            type="button"
+            className="btn-exit-modal-exit"
+            onClick={onConfirm}
+          >
+            Keluar
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── TopBar with progress bar ─────────────────────────────────────────────────
-function LessonTopBar({ currentStep, totalSteps, onBack }) {
+function LessonTopBar({ currentStep, totalSteps, onTopBarBack }) {
   const progress = (currentStep / totalSteps) * 100;
   return (
     <div className="lesson-topbar" data-node-id="281:944">
       <button
         type="button"
         className="lesson-back-btn"
-        onClick={onBack}
-        aria-label="Kembali"
+        onClick={onTopBarBack}
+        aria-label="Keluar Pelajaran"
         data-node-id="281:945"
       >
         <IconArrowLeft />
@@ -60,10 +97,10 @@ function LessonTopBar({ currentStep, totalSteps, onBack }) {
 }
 
 // ─── Page 1: Gugup vs Tenang (node 228:257) ──────────────────────────────────
-function LessonPage1({ onNext, onBack }) {
+function LessonPage1({ onNext, onTopBarBack }) {
   return (
     <div className="lesson-page lesson-page-1" data-node-id="228:257" data-name="Lesson-TarikNapas">
-      <LessonTopBar currentStep={1} totalSteps={5} onBack={onBack} />
+      <LessonTopBar currentStep={1} totalSteps={5} onTopBarBack={onTopBarBack} />
 
       {/* Main Content Area */}
       <div className="lesson-p1-content" data-node-id="256:825">
@@ -117,7 +154,7 @@ function LessonPage1({ onNext, onBack }) {
 }
 
 // ─── Page 2: Teknik 4-7-8 (node 268:876) ────────────────────────────────────
-function LessonPage2({ onNext, onBack }) {
+function LessonPage2({ onNext, onBack, onTopBarBack }) {
   const steps = [
     {
       key: "tarik",
@@ -147,7 +184,7 @@ function LessonPage2({ onNext, onBack }) {
 
   return (
     <div className="lesson-page lesson-page-2" data-node-id="268:876" data-name="Lesson-TarikNapas">
-      <LessonTopBar currentStep={2} totalSteps={5} onBack={onBack} />
+      <LessonTopBar currentStep={2} totalSteps={5} onTopBarBack={onTopBarBack} />
 
       {/* Main Content Area */}
       <div className="lesson-p2-content" data-node-id="268:885">
@@ -175,13 +212,20 @@ function LessonPage2({ onNext, onBack }) {
         </p>
       </div>
 
-      {/* Fixed bottom CTA Button */}
-      <div className="lesson-cta-wrapper">
+      {/* Dual bottom CTA Buttons */}
+      <div className="lesson-dual-cta-wrapper" data-node-id="268:895">
         <button
           type="button"
-          className="btn-lesson-finish"
+          className="btn-lesson-round-back"
+          onClick={onBack}
+          aria-label="Kembali ke halaman sebelumnya"
+        >
+          <IconArrowLeft />
+        </button>
+        <button
+          type="button"
+          className="btn-lesson-finish btn-lesson-next--flex"
           onClick={onNext}
-          data-node-id="268:895"
         >
           Lanjut
         </button>
@@ -191,7 +235,7 @@ function LessonPage2({ onNext, onBack }) {
 }
 
 // ─── Page 3: Seberapa Gugup Kamu? (node 279:258) ───────────────────────────
-function LessonPage3({ onNext, onBack }) {
+function LessonPage3({ onNext, onBack, onTopBarBack }) {
   // Slider value from -5 (Santai Aja) to +5 (Gugup Banget), center is 0
   const [sliderValue, setSliderValue] = useState(0);
   const min = -5;
@@ -209,7 +253,7 @@ function LessonPage3({ onNext, onBack }) {
 
   return (
     <div className="lesson-page lesson-page-3" data-node-id="279:258" data-name="Lesson-TarikNapas">
-      <LessonTopBar currentStep={3} totalSteps={5} onBack={onBack} />
+      <LessonTopBar currentStep={3} totalSteps={5} onTopBarBack={onTopBarBack} />
 
       {/* Main Content Area */}
       <div className="lesson-p3-content" data-node-id="279:267">
@@ -288,13 +332,20 @@ function LessonPage3({ onNext, onBack }) {
         </div>
       </div>
 
-      {/* Fixed bottom CTA Button */}
-      <div className="lesson-cta-wrapper">
+      {/* Dual bottom CTA Buttons */}
+      <div className="lesson-dual-cta-wrapper" data-node-id="279:280">
         <button
           type="button"
-          className="btn-lesson-finish"
+          className="btn-lesson-round-back"
+          onClick={onBack}
+          aria-label="Kembali ke halaman sebelumnya"
+        >
+          <IconArrowLeft />
+        </button>
+        <button
+          type="button"
+          className="btn-lesson-finish btn-lesson-next--flex"
           onClick={onNext}
-          data-node-id="279:280"
         >
           Mulai, Latihan Napas
         </button>
@@ -304,7 +355,7 @@ function LessonPage3({ onNext, onBack }) {
 }
 
 // ─── Page 4: Video Animasi Ritme Napas (node 279:407) ─────────────────────────
-function LessonPage4({ onNext, onBack }) {
+function LessonPage4({ onNext, onTopBarBack }) {
   const [cycle, setCycle] = useState(1);
   const [isCompleted, setIsCompleted] = useState(false);
   const videoRef = useRef(null);
@@ -347,8 +398,8 @@ function LessonPage4({ onNext, onBack }) {
           <button
             type="button"
             className="lesson-back-btn lesson-back-btn-white"
-            onClick={onBack}
-            aria-label="Kembali"
+            onClick={onTopBarBack}
+            aria-label="Keluar Pelajaran"
             data-node-id="279:409"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -436,10 +487,10 @@ function LessonPage4({ onNext, onBack }) {
 }
 
 // ─── Page 5: Conclusion (node 281:849) ──────────────────────────────────────
-function LessonPage5({ onNext, onBack }) {
+function LessonPage5({ onNext, onTopBarBack }) {
   return (
     <div className="lesson-page lesson-page-5" data-node-id="281:849">
-      <LessonTopBar currentStep={5} totalSteps={5} onBack={onBack} />
+      <LessonTopBar currentStep={5} totalSteps={5} onTopBarBack={onTopBarBack} />
 
       {/* Full-width hero image with relax cloud (no gradient overlay) */}
       <div className="lesson-p5-hero" data-node-id="281:910">
@@ -596,6 +647,16 @@ export default function LessonScreen({ lessonData, onBack, onFinish }) {
 
   // step: "affirmation" | 1 | 2 | 3 | 4 | 5 | "completed"
   const [step, setStep] = useState("affirmation");
+  const [showExitModal, setShowExitModal] = useState(false);
+
+  const handleTopBarBack = () => {
+    setShowExitModal(true);
+  };
+
+  const handleConfirmExit = () => {
+    setShowExitModal(false);
+    onBack?.();
+  };
 
   const goNext = () => {
     setStep((prev) => {
@@ -612,7 +673,6 @@ export default function LessonScreen({ lessonData, onBack, onFinish }) {
   const goPrev = () => {
     setStep((prev) => {
       if (prev === 1 || prev === "affirmation") {
-        onBack?.();
         return "affirmation";
       }
       if (prev === "completed") return 5;
@@ -628,12 +688,19 @@ export default function LessonScreen({ lessonData, onBack, onFinish }) {
           onComplete={goNext}
         />
       )}
-      {step === 1 && <LessonPage1 onNext={goNext} onBack={goPrev} />}
-      {step === 2 && <LessonPage2 onNext={goNext} onBack={goPrev} />}
-      {step === 3 && <LessonPage3 onNext={goNext} onBack={goPrev} />}
-      {step === 4 && <LessonPage4 onNext={goNext} onBack={goPrev} />}
-      {step === 5 && <LessonPage5 onNext={goNext} onBack={goPrev} />}
+      {step === 1 && <LessonPage1 onNext={goNext} onTopBarBack={handleTopBarBack} />}
+      {step === 2 && <LessonPage2 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
+      {step === 3 && <LessonPage3 onNext={goNext} onBack={goPrev} onTopBarBack={handleTopBarBack} />}
+      {step === 4 && <LessonPage4 onNext={goNext} onTopBarBack={handleTopBarBack} />}
+      {step === 5 && <LessonPage5 onNext={goNext} onTopBarBack={handleTopBarBack} />}
       {step === "completed" && <CompletedLesson onFinish={onFinish} />}
+
+      {/* Exit Confirmation Modal */}
+      <ExitLessonModal
+        isOpen={showExitModal}
+        onClose={() => setShowExitModal(false)}
+        onConfirm={handleConfirmExit}
+      />
     </div>
   );
 }
